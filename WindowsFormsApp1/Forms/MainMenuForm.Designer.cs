@@ -471,6 +471,7 @@
             this.Controls.Add(this.ClassSelectorTabCtrl);
             this.Name = "MainMenuForm";
             this.Text = "Main Menu";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainMenuForm_FormClosed);
             this.ClassSelectorTabCtrl.ResumeLayout(false);
             this.tabResident.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
