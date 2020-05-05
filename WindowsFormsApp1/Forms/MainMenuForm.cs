@@ -99,5 +99,13 @@ namespace WindowsFormsApp1
                 dataWrapper.Close();
             }
         }
+
+        private void NumericTextboxKeypress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
