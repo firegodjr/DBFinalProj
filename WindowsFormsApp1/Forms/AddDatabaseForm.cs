@@ -1,5 +1,5 @@
 ﻿using DBFinalProj.IO;
-using DBFinalProj.Objects;
+using DBFinalProj.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DBFinalProj.Objects;
+using DBFinalProj.Data;
 using MySql.Data.MySqlClient;
 
 namespace DBFinalProj
@@ -26,7 +26,7 @@ namespace DBFinalProj
         /// </summary>
         public void Open()
         {
-            Console.WriteLine("Opening database connection...");
+            Console.WriteLine($"Opening connection to {conn.Database} on {conn.DataSource}...");
             conn.Open();
             Console.WriteLine($"Database connection is: {conn.State}");
         }

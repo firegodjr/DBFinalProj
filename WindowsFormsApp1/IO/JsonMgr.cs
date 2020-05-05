@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DBFinalProj.Objects;
+using DBFinalProj.Data;
 using Newtonsoft.Json;
 using WindowsFormsApp1;
 

@@ -129,8 +129,8 @@
       <DependentUpon>PickDatabaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IO\JsonMgr.cs" />
-    <Compile Include="Objects\Database.cs" />
-    <Compile Include="Objects\Resident.cs" />
+    <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\Resident.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AddDatabaseForm.resx">

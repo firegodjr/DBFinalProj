@@ -40,6 +40,7 @@
             this.OKBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.AddDatabaseBtn = new System.Windows.Forms.Button();
+            this.RememberMeCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PortNUD)).BeginInit();
             this.SuspendLayout();
             // 
@@ -157,6 +158,18 @@
             this.AddDatabaseBtn.UseVisualStyleBackColor = true;
             this.AddDatabaseBtn.Click += new System.EventHandler(this.AddDatabaseBtn_Click);
             // 
+            // RememberMeCheckBox
+            // 
+            this.RememberMeCheckBox.AutoSize = true;
+            this.RememberMeCheckBox.Checked = true;
+            this.RememberMeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.RememberMeCheckBox.Location = new System.Drawing.Point(214, 286);
+            this.RememberMeCheckBox.Name = "RememberMeCheckBox";
+            this.RememberMeCheckBox.Size = new System.Drawing.Size(130, 17);
+            this.RememberMeCheckBox.TabIndex = 22;
+            this.RememberMeCheckBox.Text = "Remember My Choice";
+            this.RememberMeCheckBox.UseVisualStyleBackColor = true;
+            // 
             // PickDatabaseForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -164,6 +177,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(382, 345);
+            this.Controls.Add(this.RememberMeCheckBox);
             this.Controls.Add(this.AddDatabaseBtn);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKBtn);
@@ -200,5 +214,6 @@
         private System.Windows.Forms.Button OKBtn;
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.Button AddDatabaseBtn;
+        private System.Windows.Forms.CheckBox RememberMeCheckBox;
     }
 }

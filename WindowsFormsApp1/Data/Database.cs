@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBFinalProj.Objects
+namespace DBFinalProj.Data
 {
     public class Database
     {
