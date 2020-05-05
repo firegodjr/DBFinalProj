@@ -15,9 +15,9 @@ namespace DBFinalProj
     {
         private MySqlConnection conn;
 
-        public DataWrapper(string server, string database, int port, string user, string pwd)
+        public DataWrapper(Database database, string user, string pwd)
         {
-            string connStr = $"server={server};user={user};database={database};port={port};password={pwd}";
+            string connStr = database.GetConnectionString(user, pwd);
             conn = new MySqlConnection(connStr);
         }
 

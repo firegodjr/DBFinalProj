@@ -1,5 +1,7 @@
 ﻿using DBFinalProj;
 using DBFinalProj.Forms;
+using DBFinalProj.IO;
+using DBFinalProj.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,33 +17,78 @@ namespace WindowsFormsApp1
     public partial class MainMenuForm : Form
     {
         DataWrapper dataWrapper;
+        Database database;
 
         public MainMenuForm()
         {
             InitializeComponent();
         }
 
+        private void PickDatabase()
+        {
+            var form = new PickDatabaseForm();
+            var result = form.ShowDialog();
+            if(result == DialogResult.Cancel)
+            {
+                Close();
+            }
+            else
+            {
+                database = form.SelectedDatabase;
+            }
+        }
+
         private void InitDataWrapper(string user, string pwd)
         {
-            dataWrapper = new DataWrapper("localhost", "ccf", 3306, user, pwd);
+            dataWrapper = new DataWrapper(database, user, pwd);
             dataWrapper.Open();
+        }
+
+        /// <summary>
+        /// Prompt for credentials until the user manages to login to a database.
+        /// </summary>
+        private void TryLogin()
+        {
+            bool cont = true;
+            while (cont)
+            {
+                cont = false;
+
+                try
+                {
+                    LoginForm login = new LoginForm();
+                    var loginResult = login.ShowDialog();
+                    switch (loginResult)
+                    {
+                        case DialogResult.OK:
+                            InitDataWrapper(login.Username, login.Password);
+                            break;
+                        case DialogResult.Cancel:
+                        default:
+                            Close();
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var result = MessageBox.Show(this, $"Error trying to connect to database: {ex.Message}", "Database Connection Failed", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation);
+                    if (result == DialogResult.Cancel)
+                    {
+                        PickDatabase();
+                    }
+                    else
+                    {
+                        cont = true;
+                    }
+                }
+            }
         }
 
         // Runs when form is shown
         private void MainMenuForm_Show(object sender, EventArgs e)
         {
-            LoginForm login = new LoginForm();
-            var loginResult = login.ShowDialog();
-            switch (loginResult)
-            {
-                case DialogResult.OK:
-                    InitDataWrapper(login.Username, login.Password);
-                    break;
-                case DialogResult.Cancel:
-                default:
-                    Close();
-                    break;
-            }
+            PickDatabase();
+            TryLogin();
         }
 
         // Runs when form is closing
