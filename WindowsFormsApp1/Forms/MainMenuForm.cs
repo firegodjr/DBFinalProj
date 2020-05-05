@@ -1,4 +1,5 @@
 ﻿using DBFinalProj;
+using DBFinalProj.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,15 +19,38 @@ namespace WindowsFormsApp1
         public MainMenuForm()
         {
             InitializeComponent();
-
-            //dataWrapper = new DataWrapper();
-            //dataWrapper.Open();
         }
 
-        // Runs when form is closed
-        private void MainMenuForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void InitDataWrapper(string user, string pwd)
         {
-            //dataWrapper.Close();
+            dataWrapper = new DataWrapper("localhost", "ccf", 3306, user, pwd);
+            dataWrapper.Open();
+        }
+
+        // Runs when form is shown
+        private void MainMenuForm_Show(object sender, EventArgs e)
+        {
+            LoginForm login = new LoginForm();
+            var loginResult = login.ShowDialog();
+            switch (loginResult)
+            {
+                case DialogResult.OK:
+                    InitDataWrapper(login.Username, login.Password);
+                    break;
+                case DialogResult.Cancel:
+                default:
+                    Close();
+                    break;
+            }
+        }
+
+        // Runs when form is closing
+        private void MainMenuForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (dataWrapper != null)
+            {
+                dataWrapper.Close();
+            }
         }
     }
 }
