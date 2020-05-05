@@ -59,5 +59,34 @@ namespace DBFinalProj.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE ROOM
+        ///(	RoomNumber		SMALLINT		NOT NULL,
+        ///	ChoreSet		VARCHAR(10)		NOT NULL,
+        ///	WorkOrders		VARCHAR(100),
+        ///	RoomMeetingTime	VARCHAR(30)		NOT NULL,
+        ///	RLSSN			INT				NOT NULL,
+        ///	PRIMARY KEY(RoomNumber),
+        ///	FOREIGN KEY(RLSSN) REFERENCES RESIDENT(SSN)
+        ///);
+        ///
+        ///CREATE TABLE HOUSE_SECTION
+        ///(	Name		VARCHAR(30)		NOT NULL,
+        ///	Points		SMALLINT,
+        ///	RASSN		INT				NOT NULL,
+        ///	FOREIGN KEY(RASSN) REFERENCES RESIDENT(SSN)
+        ///	PRIMARY KEY(Name)
+        ///);
+        ///
+        ///CREATE TABLE RESIDENT
+        ///(	SSN					INT				NOT NULL,
+        ///	PhoneN				VARCHAR( [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Create_Script {
+            get {
+                return ResourceManager.GetString("Create_Script", resourceCulture);
+            }
+        }
     }
 }

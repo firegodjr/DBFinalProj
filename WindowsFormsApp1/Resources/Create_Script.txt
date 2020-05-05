@@ -1,0 +1,53 @@
+CREATE TABLE RESIDENT
+(	SSN					INT				NOT NULL,
+	PhoneN				VARCHAR(20),
+	Name				VARCHAR(30)		NOT NULL,
+	OutstandingBalance	INT,
+	MissedChores		TINYINT,
+	SmallGroup			VARCHAR(50),	
+	NextSemesterPlan	VARCHAR(50),
+	GradDate			DATE,
+	ContractStartDate	DATE			NOT NULL,
+	ContractEndDate		DATE			NOT NULL,
+	ContractMealPlan	VARCHAR(20),
+	KP					BOOL			NOT NULL,
+	FM					BOOL			NOT NULL,
+	Primary Key(SSN)
+);
+
+CREATE TABLE ROOM
+(	RoomNumber		SMALLINT		NOT NULL,
+	ChoreSet		VARCHAR(10)		NOT NULL,
+	WorkOrders		VARCHAR(100),
+	RoomMeetingTime	VARCHAR(30)		NOT NULL,
+	RLSSN			INT				NOT NULL,
+	PRIMARY KEY(RoomNumber),
+	FOREIGN KEY(RLSSN) REFERENCES RESIDENT(SSN)
+);
+
+CREATE TABLE HOUSE_SECTION
+(	Name		VARCHAR(30)		NOT NULL,
+	Points		SMALLINT,
+	RASSN		INT				NOT NULL,
+	FOREIGN KEY(RASSN) REFERENCES RESIDENT(SSN),
+	PRIMARY KEY(Name)
+);
+
+CREATE TABLE Belongs_To
+(
+	RoomNum	SMALLINT	NOT NULL,
+	SectionName	VARCHAR(30)	NOT NULL,
+	PRIMARY KEY (RoomNum, SectionName),
+	FOREIGN KEY (RoomNum) REFERENCES ROOM(RoomNumber),
+	FOREIGN KEY (SectionName) REFERENCES HOUSE_SECTION(Name)
+);
+
+CREATE TABLE Assigned_To
+(
+	RoomNum	SMALLINT	NOT NULL,
+	ResidentSSN	INT		NOT NULL,
+	PRIMARY KEY(RoomNum, ResidentSSN),
+	FOREIGN KEY(RoomNum) REFERENCES ROOM(RoomNumber),
+	FOREIGN KEY(ResidentSSN) REFERENCES RESIDENT(SSN)
+);
+
