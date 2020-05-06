@@ -82,6 +82,27 @@ namespace DBFinalProj
             return dict;
         }
 
+
+        /// <summary>
+        /// Inserts a given row into a given table.
+        /// </summary>
+        /// <param name="table"> The table to insert into </param>
+        /// <param name="row"> A dictionary of attributes to be updated in the row</param>
+        public void InsertRow(string table, Dictionary<string, object> row)
+        {
+            string sql = $"INSERT INTO {table} VALUES (";
+            string quote; 
+            foreach (KeyValuePair<string, object> kv in row)
+            {
+                quote = (kv.Value.GetType() == typeof(string) ? "\"" : ""); // Set to quote if key is a string
+                sql += $"{quote}{kv.Value}{quote},";
+            }
+            sql.TrimEnd(',');
+            sql += ")";
+            var cmd = CreateCommand(sql);
+            cmd.ExecuteNonQuery();
+        }
+
         /// <summary>
         /// Updates a table row using a singleton primary key.
         /// </summary>
