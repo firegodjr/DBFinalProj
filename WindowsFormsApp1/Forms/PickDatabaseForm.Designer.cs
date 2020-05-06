@@ -55,6 +55,7 @@
             // 
             // NameTextBox
             // 
+            this.NameTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.NameTextBox.Location = new System.Drawing.Point(249, 13);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.ReadOnly = true;
@@ -72,6 +73,11 @@
             // 
             // PortNUD
             // 
+            this.PortNUD.Increment = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.PortNUD.Location = new System.Drawing.Point(245, 91);
             this.PortNUD.Maximum = new decimal(new int[] {
             65535,
@@ -94,6 +100,7 @@
             // 
             // SchemaTextBox
             // 
+            this.SchemaTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.SchemaTextBox.Location = new System.Drawing.Point(264, 65);
             this.SchemaTextBox.Name = "SchemaTextBox";
             this.SchemaTextBox.ReadOnly = true;
@@ -111,6 +118,7 @@
             // 
             // ServerTextBox
             // 
+            this.ServerTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.ServerTextBox.Location = new System.Drawing.Point(249, 39);
             this.ServerTextBox.Name = "ServerTextBox";
             this.ServerTextBox.ReadOnly = true;
