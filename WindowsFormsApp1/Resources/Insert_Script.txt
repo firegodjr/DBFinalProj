@@ -1,0 +1,34 @@
+INSERT INTO resident
+VALUES 
+(000000001, "618-618-6118", "Kermit Kermidian", 250, 6, "Kermit's Deep Talks", "Kermit Plans to Move Out", 20220522, 20170818,20220517,"Meal Plan 1",1, 0),
+(000000002, "666-654-7890", "Ms. Piggy", 6, 0, "Kermit's Deep Talks", "Co-Op in Nashville", 20220522, 20170818,20220517,"Meal Plan 3",0, 0),
+(000000003, "666-654-7891", "Grover", 1200, 13, "Kermit's Deep Talks", "Stay in House", 20220522, 20170818,20220517,"Meal Plan 2",0, 0),
+(000000004, "666-654-2222", "Cookie Monster", 0, 0, "Cookie Baking Club", "Cooking Internship, Stay in House", 20220522, 20170818,20220517,"Cookies Only", 0, 1),
+(000000005, "666-718-3424", "Bunsen", 0, 2, "War Crimes: The Novel: The Sequel", "Unknown", 20220522, 20170818,20220517,"Off-Meal Plan",0, 0),
+(000000006, "677-644-9090", "Rapunzel Jamalothy", 3000, 17, "Unknown", "Stay in House", 20220522, 20170818,20220517,"No Meal Plan",0, 0);
+
+INSERT INTO room
+VALUES
+(101, "VII", "None", "Wednesdays, 7pm", 000000001),
+(102, "IV", "None", "Fridays, 8 pm", 000000002),
+(103, "II", "Shower-head leaks, toilet screams when flushed, mirror bloody", "Mondays, 2 pm", 000000003);
+
+INSERT INTO house_section
+VALUES
+("Boingo Snacks", 23, 000000004),
+("The Lil' Dippers",42, 000000005);
+
+INSERT INTO belongs_to
+VALUES
+(101, "Boingo Snacks"),
+(102, "The Lil' Dippers"),
+(103, "The Lil' Dippers");
+
+INSERT INTO assigned_to
+VALUES
+(101, 000000001),
+(101, 000000004),
+(102, 000000002),
+(102, 000000005),
+(103, 000000003),
+(103, 000000006);
