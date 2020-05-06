@@ -29,6 +29,13 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        private void InitUI()
+        {
+            var SSNs = Resident.GetAllResidents(dataWrapper);
+            var StringSSNs = SSNs.Select(ssn => ssn.ToString("000000000"));
+            ResidentListBox.Items.AddRange(StringSSNs.ToArray());
+        }
+
         private void PickDatabase()
         {
             var form = new PickDatabaseForm();
@@ -94,6 +101,7 @@ namespace WindowsFormsApp1
         {
             PickDatabase();
             TryLogin();
+            InitUI();
         }
 
         // Runs when form is closing

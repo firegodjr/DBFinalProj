@@ -61,7 +61,8 @@ namespace DBFinalProj
         /// <param name="table">The table to select from</param>
         public Dictionary<string, object> GetRow(string keyName, object key, string table)
         {
-            var cmd = CreateCommand($"SELECT * FROM {table} WHERE {keyName} == {key.ToString()};");
+            string quote = (key.GetType() == typeof(string) ? "\"" : ""); // Set to quote if key is a string
+            var cmd = CreateCommand($"SELECT * FROM {table} WHERE {keyName} == {quote}{key.ToString()}{quote};");
             var dict = new Dictionary<string, object>();
             using(MySqlDataReader rdr = cmd.ExecuteReader())
             {
@@ -90,6 +91,7 @@ namespace DBFinalProj
         /// <param name="row">A dictionary of attributes to be updated in the row</param>
         public void UpdateRow(string keyName, object key, string table, Dictionary<string, object> row)
         {
+            string quote = (key.GetType() == typeof(string) ? "\"" : ""); // Set to quote if key is a string
             string sql = $"UPDATE {table} ";
             sql += "SET ";
             foreach (KeyValuePair<string, object> kv in row)
@@ -97,7 +99,7 @@ namespace DBFinalProj
                 sql += $"{kv.Key} = {kv.Value.ToString()},";
             }
             sql.TrimEnd(',');
-            sql += $" WHERE {keyName} == {key.ToString()};";
+            sql += $" WHERE {keyName} == {quote}{key.ToString()}{quote};";
             var cmd = CreateCommand(sql);
             cmd.ExecuteNonQuery();
         }
@@ -110,7 +112,8 @@ namespace DBFinalProj
         /// <param name="table">The table to update</param>
         public void DeleteRow(string keyName, object key, string table)
         {
-            var cmd = CreateCommand($"DELETE FROM {table} WHERE {keyName} == {key.ToString()};");
+            string quote = (key.GetType() == typeof(string) ? "\"" : ""); // Set to quote if key is a string
+            var cmd = CreateCommand($"DELETE FROM {table} WHERE {keyName} == {quote}{key.ToString()}{quote};");
             cmd.ExecuteNonQuery();
         }
     }
