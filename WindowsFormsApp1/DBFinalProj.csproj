@@ -178,5 +178,8 @@
   <ItemGroup>
     <None Include="Resources\Create_Script.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Insert_Script.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
