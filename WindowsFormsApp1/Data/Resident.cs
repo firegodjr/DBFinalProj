@@ -8,32 +8,11 @@ using MySql.Data.MySqlClient;
 
 namespace DBFinalProj.Data
 {
-    class Resident
+    static class Resident
     {
-        public int SSN;
-        public string Name;
-        public int PhoneNumber;
-        public string ContractStartDate;
-        public string ContractEndDate;
-        public string MealPlan;
-        public int AssignedRoom;
-        public string GraduationDate;
-        public string NextSemesterPlan;
-        public int ChoresMissed;
-        public int OutstandingBalance;
-        public string SmallGroup;
-        public bool IsKP;
-        public bool IsFM;
-
-        public Resident()
-        {
-
-        }
-
         /// <summary>
         /// Gets the SSN of all residents in the RESIDENT table
         /// </summary>
-        /// <returns></returns>
         public static int[] GetAllResidents(DataWrapper dw)
         {
             var SSNs = new List<int>();
@@ -49,6 +28,19 @@ namespace DBFinalProj.Data
             }
 
             return SSNs.ToArray();
+        }
+
+        /// <summary>
+        /// Gets resident attributes given the resident's ssn
+        /// </summary>
+        public static Dictionary<string, object> GetResident(int ssn, DataWrapper dw)
+        {
+            return dw.GetRow("SSN", ssn, "RESIDENT");
+        }
+
+        public static int GetAssignedRoom(int ssn, DataWrapper dw)
+        {
+            return int.Parse(dw.GetRow("ResidentSSN", ssn, "ASSIGNED_TO")["RoomNum"].ToString());
         }
     }
 }

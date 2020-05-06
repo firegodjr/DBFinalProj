@@ -31,9 +31,17 @@ namespace WindowsFormsApp1
 
         private void InitUI()
         {
-            var SSNs = Resident.GetAllResidents(dataWrapper);
-            var StringSSNs = SSNs.Select(ssn => ssn.ToString("000000000"));
-            ResidentListBox.Items.AddRange(StringSSNs.ToArray());
+            var stringSSNs = Resident.GetAllResidents(dataWrapper).Select(ssn => ssn.ToString("000000000"));
+            var stringRoomNums = Room.GetAllRooms(dataWrapper).Select(rn => rn.ToString());
+            var stringSectionNames = Section.GetAllSections(dataWrapper);
+
+            ResidentListBox.Items.Clear();
+            RoomListBox.Items.Clear();
+            SectionListBox.Items.Clear();
+
+            ResidentListBox.Items.AddRange(stringSSNs.ToArray());
+            RoomListBox.Items.AddRange(stringRoomNums.ToArray());
+            SectionListBox.Items.AddRange(stringSectionNames);
         }
 
         private void PickDatabase()
@@ -113,12 +121,88 @@ namespace WindowsFormsApp1
             }
         }
 
+        // Filters keypress events based on whether or not the pressed key was numeric
         private void NumericTextboxKeypress(object sender, KeyPressEventArgs e)
         {
             if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
+        }
+
+        private void ResidentListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ResidentListBox.SelectedItem != null)
+            {
+                int ssn;
+                bool success = int.TryParse(ResidentListBox.SelectedItem.ToString(), out ssn);
+                if(success)
+                {
+                    Dictionary<string, object> resident = Resident.GetResident(ssn, dataWrapper);
+                    UpdateResidentUI(resident);
+                }
+            }
+        }
+
+        private void RoomListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (RoomListBox.SelectedItem != null)
+            {
+                int roomNum;
+                bool success = int.TryParse(RoomListBox.SelectedItem.ToString(), out roomNum);
+                if (success)
+                {
+                    Dictionary<string, object> room = Room.GetRoom(roomNum, dataWrapper);
+                    UpdateRoomUI(room);
+                }
+            }
+        }
+
+        private void SectionListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SectionListBox.SelectedItem != null)
+            {
+                string sectionName = SectionListBox.SelectedItem.ToString();
+                Dictionary<string, object> section = Section.GetSection(sectionName, dataWrapper);
+                UpdateSectionUI(section);
+            }
+        }
+
+        private void UpdateResidentUI(Dictionary<string, object> residentAttribs)
+        {
+            ResidentSSNTextBox.Text                     = residentAttribs["SSN"].ToString();
+            ResidentPhoneNumTextBox.Text                = residentAttribs["PhoneN"].ToString();
+            ResidentNameTextBox.Text                    = residentAttribs["Name"].ToString();
+            ResidentOutstandingBalanceNUD.Value         = int.Parse(residentAttribs["OutstandingBalance"].ToString());
+            ResidentChoresMissedNUD.Value               = int.Parse(residentAttribs["MissedChores"].ToString());
+            ResidentSmallGroupTextBox.Text              = residentAttribs["SmallGroup"].ToString();
+            ResidentNextSemesterTextBox.Text            = residentAttribs["NextSemesterPlan"].ToString();
+            ResidentGraduationDatetimePicker.Text       = residentAttribs["GradDate"].ToString();
+            ResidentContractStartDatetimePicker.Text    = residentAttribs["ContractStartDate"].ToString();
+            ResidentContractEndDatetimePicker.Text      = residentAttribs["ContractEndDate"].ToString();
+            ResidentMealPlanTextBox.Text                = residentAttribs["ContractMealPlan"].ToString();
+            ResidentIsKPCheckbox.Checked                = (bool)residentAttribs["KP"];
+            ResidentIsFMCheckbox.Checked                = (bool)residentAttribs["FM"];
+
+            ResidentAssignedRoomNumTextBox.Text = Resident.GetAssignedRoom((int)residentAttribs["SSN"], dataWrapper).ToString();
+        }
+
+        private void UpdateRoomUI(Dictionary<string, object> roomAttribs)
+        {
+            RoomNumberNUD.Value = int.Parse(roomAttribs["RoomNumber"].ToString());
+            RoomChoreSetTextBox.Text = roomAttribs["ChoreSet"].ToString();
+            RoomWorkOrdersTextBox.Text = roomAttribs["WorkOrders"].ToString();
+            RoomMeetingTimeTextBox.Text = roomAttribs["RoomMeetingTime"].ToString();
+            RoomLeaderSSNTextBox.Text = (int.Parse(roomAttribs["RLSSN"].ToString())).ToString("000000000");
+
+            RoomSectionTextBox.Text = Room.GetSection((int)RoomNumberNUD.Value, dataWrapper);
+        }
+
+        private void UpdateSectionUI(Dictionary<string, object> sectionAttribs)
+        {
+            SectionNameTextBox.Text = sectionAttribs["Name"].ToString();
+            SectionPointsNUD.Value = int.Parse(sectionAttribs["Points"].ToString());
+            SectionRASSNNUD.Value = int.Parse(sectionAttribs["RASSN"].ToString());
         }
     }
 }
