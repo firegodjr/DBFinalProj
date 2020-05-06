@@ -98,6 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DataWrapper.cs" />
+    <Compile Include="Data\Section.cs" />
+    <Compile Include="Data\Room.cs" />
     <Compile Include="Forms\AddDatabaseForm.cs">
       <SubType>Form</SubType>
     </Compile>

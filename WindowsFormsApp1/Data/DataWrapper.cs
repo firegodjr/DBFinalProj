@@ -62,10 +62,11 @@ namespace DBFinalProj
         public Dictionary<string, object> GetRow(string keyName, object key, string table)
         {
             string quote = (key.GetType() == typeof(string) ? "\"" : ""); // Set to quote if key is a string
-            var cmd = CreateCommand($"SELECT * FROM {table} WHERE {keyName} == {quote}{key.ToString()}{quote};");
+            var cmd = CreateCommand($"SELECT * FROM {table} WHERE {keyName} = {quote}{key.ToString()}{quote};");
             var dict = new Dictionary<string, object>();
             using(MySqlDataReader rdr = cmd.ExecuteReader())
             {
+                rdr.Read();
                 var fieldCount = rdr.FieldCount;
                 var keys = new List<string>();
                 for(int i=0; i < fieldCount; ++i)
@@ -120,7 +121,7 @@ namespace DBFinalProj
                 sql += $"{kv.Key} = {kv.Value.ToString()},";
             }
             sql.TrimEnd(',');
-            sql += $" WHERE {keyName} == {quote}{key.ToString()}{quote};";
+            sql += $" WHERE {keyName} = {quote}{key.ToString()}{quote};";
             var cmd = CreateCommand(sql);
             cmd.ExecuteNonQuery();
         }
