@@ -14,6 +14,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
+    /// <summary>
+    /// The main form of the program, orchestrates all functionality through the use of UI events.
+    /// 
+    /// Calls DataWrapper.cs, along with other forms as needed.
+    /// </summary>
     public partial class MainMenuForm : Form
     {
         DataWrapper dataWrapper;
@@ -65,7 +70,7 @@ namespace WindowsFormsApp1
                             break;
                         case DialogResult.Cancel:
                         default:
-                            Close();
+                            PickDatabase();
                             break;
                     }
                 }
