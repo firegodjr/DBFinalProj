@@ -23,7 +23,7 @@ namespace DBFinalProj.Data
                 var keys = new List<string>();
                 while(rdr.Read())
                 {
-                    SSNs.Add(rdr.GetInt16(0));
+                    SSNs.Add(rdr.GetInt32(0));
                 }
             }
 
@@ -38,9 +38,34 @@ namespace DBFinalProj.Data
             return dw.GetRow("SSN", ssn, "RESIDENT");
         }
 
+        public static void AddResident(int ssn, string name, string startDate, string endDate, DataWrapper dw)
+        {
+            var attribs = new Dictionary<string, object>();
+            attribs.Add("SSN", ssn);
+            attribs.Add("Name", name);
+            attribs.Add("ContractStartDate", startDate);
+            attribs.Add("ContractEndDate", endDate);
+            attribs.Add("KP", false);
+            attribs.Add("FM", false);
+            dw.InsertRow("RESIDENT", attribs);
+        }
+
         public static int GetAssignedRoom(int ssn, DataWrapper dw)
         {
-            return int.Parse(dw.GetRow("ResidentSSN", ssn, "ASSIGNED_TO")["RoomNum"].ToString());
+            var attribs = dw.GetRow("ResidentSSN", ssn, "ASSIGNED_TO");
+            if (attribs.ContainsKey("RoomNum"))
+            {
+                return int.Parse(attribs["RoomNum"].ToString());
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public static void DeleteResident(int ssn, DataWrapper dw)
+        {
+            dw.DeleteRow("SSN", ssn, "RESIDENT");
         }
     }
 }

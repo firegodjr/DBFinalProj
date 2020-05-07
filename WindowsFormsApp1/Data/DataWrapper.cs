@@ -66,17 +66,19 @@ namespace DBFinalProj
             var dict = new Dictionary<string, object>();
             using(MySqlDataReader rdr = cmd.ExecuteReader())
             {
-                rdr.Read();
-                var fieldCount = rdr.FieldCount;
-                var keys = new List<string>();
-                for(int i=0; i < fieldCount; ++i)
+                if(rdr.Read())
                 {
-                    keys.Add(rdr.GetName(i));
-                }
-                
-                for(int i=0; i < fieldCount; ++i)
-                {
-                    dict.Add(keys[i], rdr.GetValue(i));
+                    var fieldCount = rdr.FieldCount;
+                    var keys = new List<string>();
+                    for (int i = 0; i < fieldCount; ++i)
+                    {
+                        keys.Add(rdr.GetName(i));
+                    }
+
+                    for (int i = 0; i < fieldCount; ++i)
+                    {
+                        dict.Add(keys[i], rdr.GetValue(i));
+                    }
                 }
             }
 
@@ -91,14 +93,21 @@ namespace DBFinalProj
         /// <param name="row"> A dictionary of attributes to be updated in the row</param>
         public void InsertRow(string table, Dictionary<string, object> row)
         {
-            string sql = $"INSERT INTO {table} VALUES (";
+            KeyValuePair<string, object>[] orderedRow = row.ToArray();
+            string sql = $"INSERT INTO {table} (";
+            foreach(KeyValuePair<string, object> kv in orderedRow)
+            {
+                sql += $"{kv.Key},";
+            }
+            sql = sql.TrimEnd(',');
+            sql += ") VALUES (";
             string quote; 
-            foreach (KeyValuePair<string, object> kv in row)
+            foreach (KeyValuePair<string, object> kv in orderedRow)
             {
                 quote = (kv.Value.GetType() == typeof(string) ? "\"" : ""); // Set to quote if key is a string
                 sql += $"{quote}{kv.Value}{quote},";
             }
-            sql.TrimEnd(',');
+            sql = sql.TrimEnd(',');
             sql += ")";
             var cmd = CreateCommand(sql);
             cmd.ExecuteNonQuery();
@@ -120,7 +129,7 @@ namespace DBFinalProj
             {
                 sql += $"{kv.Key} = {kv.Value.ToString()},";
             }
-            sql.TrimEnd(',');
+            sql = sql.TrimEnd(',');
             sql += $" WHERE {keyName} = {quote}{key.ToString()}{quote};";
             var cmd = CreateCommand(sql);
             cmd.ExecuteNonQuery();
@@ -135,8 +144,13 @@ namespace DBFinalProj
         public void DeleteRow(string keyName, object key, string table)
         {
             string quote = (key.GetType() == typeof(string) ? "\"" : ""); // Set to quote if key is a string
-            var cmd = CreateCommand($"DELETE FROM {table} WHERE {keyName} == {quote}{key.ToString()}{quote};");
+            var cmd = CreateCommand($"DELETE FROM {table} WHERE {keyName} = {quote}{key.ToString()}{quote};");
             cmd.ExecuteNonQuery();
+        }
+
+        public static string GetSqlDateString(DateTime date)
+        {
+            return $"{date.Year.ToString("0000")}-{date.Month.ToString("00")}-{date.Day.ToString("00")}";
         }
     }
 }

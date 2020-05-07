@@ -106,6 +106,12 @@
     <Compile Include="Forms\AddDatabaseForm.Designer.cs">
       <DependentUpon>AddDatabaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CreateResidentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateResidentForm.Designer.cs">
+      <DependentUpon>CreateResidentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ErrorDispForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AddDatabaseForm.resx">
       <DependentUpon>AddDatabaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateResidentForm.resx">
+      <DependentUpon>CreateResidentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ErrorDispForm.resx">
       <DependentUpon>ErrorDispForm.cs</DependentUpon>

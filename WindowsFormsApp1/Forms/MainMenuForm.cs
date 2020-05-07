@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
     /// <summary>
     /// The main form of the program, orchestrates all functionality through the use of UI events.
     /// 
-    /// Calls DataWrapper.cs, along with other forms as needed.
+    /// Calls DataWrapper.cs for database access, Resident.cs Room.cs and Section.cs for help with retrieving entity-specific values, and calls other forms as needed.
     /// </summary>
     public partial class MainMenuForm : Form
     {
@@ -29,6 +29,9 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Retrieves latest database data and refreshes all UI elements
+        /// </summary>
         private void InitUI()
         {
             var stringSSNs = Resident.GetAllResidents(dataWrapper).Select(ssn => ssn.ToString("000000000"));
@@ -42,6 +45,10 @@ namespace WindowsFormsApp1
             ResidentListBox.Items.AddRange(stringSSNs.ToArray());
             RoomListBox.Items.AddRange(stringRoomNums.ToArray());
             SectionListBox.Items.AddRange(stringSectionNames);
+
+            ResidentListBox.SelectedIndex = 0;
+            RoomListBox.SelectedIndex = 0;
+            SectionListBox.SelectedIndex = 0;
         }
 
         private void PickDatabase()
@@ -168,23 +175,47 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void UpdateResidentUI(Dictionary<string, object> residentAttribs)
+        private T ToValue<T>(object obj)
         {
-            ResidentSSNTextBox.Text                     = residentAttribs["SSN"].ToString();
-            ResidentPhoneNumTextBox.Text                = residentAttribs["PhoneN"].ToString();
-            ResidentNameTextBox.Text                    = residentAttribs["Name"].ToString();
-            ResidentOutstandingBalanceNUD.Value         = int.Parse(residentAttribs["OutstandingBalance"].ToString());
-            ResidentChoresMissedNUD.Value               = int.Parse(residentAttribs["MissedChores"].ToString());
-            ResidentSmallGroupTextBox.Text              = residentAttribs["SmallGroup"].ToString();
-            ResidentNextSemesterTextBox.Text            = residentAttribs["NextSemesterPlan"].ToString();
-            ResidentGraduationDatetimePicker.Text       = residentAttribs["GradDate"].ToString();
-            ResidentContractStartDatetimePicker.Text    = residentAttribs["ContractStartDate"].ToString();
-            ResidentContractEndDatetimePicker.Text      = residentAttribs["ContractEndDate"].ToString();
-            ResidentMealPlanTextBox.Text                = residentAttribs["ContractMealPlan"].ToString();
-            ResidentIsKPCheckbox.Checked                = (bool)residentAttribs["KP"];
-            ResidentIsFMCheckbox.Checked                = (bool)residentAttribs["FM"];
+            if (obj.GetType() == typeof(DBNull))
+            {
+                if (typeof(T) == typeof(DateTime))
+                {
+                    return (T)Convert.ChangeType(DateTime.Now, typeof(T));
+                }
+                else if (typeof(T) == typeof(string))
+                {
+                    return (T)Convert.ChangeType("", typeof(T));
+                }
+                else if(typeof(T) == typeof(bool))
+                {
+                    return (T)Convert.ChangeType(false, typeof(T));
+                }
+                else
+                {
+                    return (T)Convert.ChangeType(0, typeof(T));
+                }
+            }
+            else return (T)Convert.ChangeType(obj, typeof(T));
+        }
 
-            ResidentAssignedRoomNumTextBox.Text = Resident.GetAssignedRoom((int)residentAttribs["SSN"], dataWrapper).ToString();
+        private void UpdateResidentUI(Dictionary<string, object> dict)
+        {
+            ResidentSSNTextBox.Text                     = ToValue<int>(dict["SSN"]).ToString("000000000");
+            ResidentPhoneNumTextBox.Text                = ToValue<string>(dict["PhoneN"]);
+            ResidentNameTextBox.Text                    = ToValue<string>(dict["Name"]);
+            ResidentOutstandingBalanceNUD.Value         = ToValue<int>(dict["OutstandingBalance"]);
+            ResidentChoresMissedNUD.Value               = ToValue<int>(dict["MissedChores"]);
+            ResidentSmallGroupTextBox.Text              = ToValue<string>(dict["SmallGroup"]);
+            ResidentNextSemesterTextBox.Text            = ToValue<string>(dict["NextSemesterPlan"]);
+            ResidentGraduationDatetimePicker.Value      = ToValue<DateTime>(dict["GradDate"]);
+            ResidentContractStartDatetimePicker.Value   = ToValue<DateTime>(dict["ContractStartDate"]);
+            ResidentContractEndDatetimePicker.Value     = ToValue<DateTime>(dict["ContractEndDate"]);
+            ResidentMealPlanTextBox.Text                = ToValue<string>(dict["ContractMealPlan"]);
+            ResidentIsKPCheckbox.Checked                = ToValue<bool>(dict["KP"]);
+            ResidentIsFMCheckbox.Checked                = ToValue<bool>(dict["FM"]);
+
+            ResidentAssignedRoomNumTextBox.Text = Resident.GetAssignedRoom((int)dict["SSN"], dataWrapper).ToString();
         }
 
         private void UpdateRoomUI(Dictionary<string, object> roomAttribs)
@@ -203,6 +234,29 @@ namespace WindowsFormsApp1
             SectionNameTextBox.Text = sectionAttribs["Name"].ToString();
             SectionPointsNUD.Value = int.Parse(sectionAttribs["Points"].ToString());
             SectionRASSNNUD.Value = int.Parse(sectionAttribs["RASSN"].ToString());
+        }
+
+        private void AddResidentBtn_Click(object sender, EventArgs e)
+        {
+            var form = new CreateResidentForm();
+            var result = form.ShowDialog();
+            var ssn = form.SSN;
+            if (result == DialogResult.OK)
+            {
+                Resident.AddResident(ssn, form.ResidentName, form.StartDate, form.EndDate, dataWrapper);
+                InitUI();
+                ResidentListBox.SelectedItem = ssn.ToString();
+            }
+        }
+
+        private void ResidentDeleteBtn_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(this, "Are you sure you want to delete this resident?", "Are you sure?", MessageBoxButtons.YesNo);
+            if(result == DialogResult.Yes)
+            {
+                Resident.DeleteResident(int.Parse(ResidentListBox.SelectedItem.ToString()), dataWrapper);
+                InitUI();
+            }
         }
     }
 }
