@@ -1,7 +1,7 @@
 CREATE TABLE RESIDENT
 (	SSN					INT				NOT NULL,
 	PhoneN				VARCHAR(20),
-	Name				VARCHAR(30)		NOT NULL,
+	Name				VARCHAR(40)		NOT NULL,
 	OutstandingBalance	INT,
 	MissedChores		TINYINT,
 	SmallGroup			VARCHAR(50),	
