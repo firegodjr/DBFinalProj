@@ -29,6 +29,16 @@ namespace DBFinalProj.Data
             return SSNs.ToArray();
         }
 
+        public static void AddRoom(int roomNum, string choreSet, string roomMeetingTime, int roomLeaderSSN, DataWrapper dw)
+        {
+            var attribs = new Dictionary<string, object>();
+            attribs.Add("RoomNumber", roomNum);
+            attribs.Add("ChoreSet", choreSet);
+            attribs.Add("RoomMeetingTime", roomMeetingTime);
+            attribs.Add("RLSSN", roomLeaderSSN);
+            dw.InsertRow("ROOM", attribs);
+        }
+
         /// <summary>
         /// Gets room attributes given the room number
         /// </summary>
@@ -40,6 +50,11 @@ namespace DBFinalProj.Data
         public static string GetSection(int roomNum, DataWrapper dw)
         {
             return dw.GetRow("RoomNum", roomNum, "BELONGS_TO")["SectionName"].ToString();
+        }
+
+        public static void DeleteRoom(int roomNum, DataWrapper dw)
+        {
+            dw.DeleteRow("RoomNumber", roomNum, "ROOM");
         }
     }
 }

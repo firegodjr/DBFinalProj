@@ -36,5 +36,10 @@ namespace DBFinalProj.Data
         {
             return dw.GetRow("Name", sectionName, "HOUSE_SECTION");
         }
+
+        public static void DeleteSection(string sectionName, DataWrapper dw)
+        {
+            dw.DeleteRow("Name", sectionName, "HOUSE_SECTION");
+        }
     }
 }
