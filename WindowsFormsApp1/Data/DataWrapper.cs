@@ -148,6 +148,11 @@ namespace DBFinalProj
             cmd.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Converts a DateTime object into an acceptable SQL representation
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public static string GetSqlDateString(DateTime date)
         {
             return $"{date.Year.ToString("0000")}-{date.Month.ToString("00")}-{date.Day.ToString("00")}";

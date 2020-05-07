@@ -32,6 +32,8 @@
             this.tabResident = new System.Windows.Forms.TabPage();
             this.AddResidentBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.ResidentNextSemesterTextBox = new System.Windows.Forms.TextBox();
             this.ResidentAssignedRoomNumTextBox = new System.Windows.Forms.TextBox();
             this.ResidentMealPlanTextBox = new System.Windows.Forms.TextBox();
@@ -62,6 +64,8 @@
             this.tabRoom = new System.Windows.Forms.TabPage();
             this.AddRoomBtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.RoomDeleteBtn = new System.Windows.Forms.Button();
             this.RoomSectionTextBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.RoomMeetingTimeTextBox = new System.Windows.Forms.TextBox();
@@ -78,6 +82,8 @@
             this.tabSection = new System.Windows.Forms.TabPage();
             this.AddSectionBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.SectionDeleteBtn = new System.Windows.Forms.Button();
             this.SectionRASSNNUD = new System.Windows.Forms.NumericUpDown();
             this.label20 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -85,12 +91,6 @@
             this.SectionPointsNUD = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
             this.SectionListBox = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.ClassSelectorTabCtrl.SuspendLayout();
             this.tabResident.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -181,6 +181,25 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Resident Attributes";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(421, 359);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(109, 23);
+            this.button3.TabIndex = 33;
+            this.button3.Text = "Save";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(536, 359);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(109, 23);
+            this.button4.TabIndex = 32;
+            this.button4.Text = "Delete";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.ResidentDeleteBtn_Click);
             // 
             // ResidentNextSemesterTextBox
             // 
@@ -464,11 +483,12 @@
             this.AddRoomBtn.TabIndex = 4;
             this.AddRoomBtn.Text = "Add New";
             this.AddRoomBtn.UseVisualStyleBackColor = true;
+            this.AddRoomBtn.Click += new System.EventHandler(this.AddRoomBtn_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.RoomDeleteBtn);
             this.groupBox2.Controls.Add(this.RoomSectionTextBox);
             this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.RoomMeetingTimeTextBox);
@@ -488,6 +508,25 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Room Attributes";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(421, 529);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(109, 23);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "Save";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // RoomDeleteBtn
+            // 
+            this.RoomDeleteBtn.Location = new System.Drawing.Point(536, 529);
+            this.RoomDeleteBtn.Name = "RoomDeleteBtn";
+            this.RoomDeleteBtn.Size = new System.Drawing.Size(109, 23);
+            this.RoomDeleteBtn.TabIndex = 5;
+            this.RoomDeleteBtn.Text = "Delete";
+            this.RoomDeleteBtn.UseVisualStyleBackColor = true;
+            this.RoomDeleteBtn.Click += new System.EventHandler(this.RoomDeleteBtn_Click);
             // 
             // RoomSectionTextBox
             // 
@@ -649,7 +688,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button5);
-            this.groupBox3.Controls.Add(this.button6);
+            this.groupBox3.Controls.Add(this.SectionDeleteBtn);
             this.groupBox3.Controls.Add(this.SectionRASSNNUD);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.label13);
@@ -663,6 +702,25 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Section Attributes";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(424, 97);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(109, 23);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "Save";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // SectionDeleteBtn
+            // 
+            this.SectionDeleteBtn.Location = new System.Drawing.Point(539, 97);
+            this.SectionDeleteBtn.Name = "SectionDeleteBtn";
+            this.SectionDeleteBtn.Size = new System.Drawing.Size(109, 23);
+            this.SectionDeleteBtn.TabIndex = 19;
+            this.SectionDeleteBtn.Text = "Delete";
+            this.SectionDeleteBtn.UseVisualStyleBackColor = true;
+            this.SectionDeleteBtn.Click += new System.EventHandler(this.SectionDeleteBtn_Click);
             // 
             // SectionRASSNNUD
             // 
@@ -726,61 +784,6 @@
             this.SectionListBox.Size = new System.Drawing.Size(212, 529);
             this.SectionListBox.TabIndex = 2;
             this.SectionListBox.SelectedIndexChanged += new System.EventHandler(this.SectionListBox_SelectedIndexChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(536, 529);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Delete";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(421, 529);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(421, 359);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(109, 23);
-            this.button3.TabIndex = 33;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(536, 359);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(109, 23);
-            this.button4.TabIndex = 32;
-            this.button4.Text = "Delete";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.ResidentDeleteBtn_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(424, 97);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(109, 23);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "Save";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(539, 97);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(109, 23);
-            this.button6.TabIndex = 19;
-            this.button6.Text = "Delete";
-            this.button6.UseVisualStyleBackColor = true;
             // 
             // MainMenuForm
             // 
@@ -870,12 +873,12 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button AddRoomBtn;
         private System.Windows.Forms.Button AddSectionBtn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button RoomDeleteBtn;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button SectionDeleteBtn;
     }
 }
 

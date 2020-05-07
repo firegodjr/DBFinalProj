@@ -175,9 +175,9 @@ namespace WindowsFormsApp1
             }
         }
 
-        private T ToValue<T>(object obj)
+        private T ToNonNull<T>(object obj)
         {
-            if (obj.GetType() == typeof(DBNull))
+            if (obj.GetType() == typeof(DBNull) || obj == null)
             {
                 if (typeof(T) == typeof(DateTime))
                 {
@@ -201,39 +201,39 @@ namespace WindowsFormsApp1
 
         private void UpdateResidentUI(Dictionary<string, object> dict)
         {
-            ResidentSSNTextBox.Text                     = ToValue<int>(dict["SSN"]).ToString("000000000");
-            ResidentPhoneNumTextBox.Text                = ToValue<string>(dict["PhoneN"]);
-            ResidentNameTextBox.Text                    = ToValue<string>(dict["Name"]);
-            ResidentOutstandingBalanceNUD.Value         = ToValue<int>(dict["OutstandingBalance"]);
-            ResidentChoresMissedNUD.Value               = ToValue<int>(dict["MissedChores"]);
-            ResidentSmallGroupTextBox.Text              = ToValue<string>(dict["SmallGroup"]);
-            ResidentNextSemesterTextBox.Text            = ToValue<string>(dict["NextSemesterPlan"]);
-            ResidentGraduationDatetimePicker.Value      = ToValue<DateTime>(dict["GradDate"]);
-            ResidentContractStartDatetimePicker.Value   = ToValue<DateTime>(dict["ContractStartDate"]);
-            ResidentContractEndDatetimePicker.Value     = ToValue<DateTime>(dict["ContractEndDate"]);
-            ResidentMealPlanTextBox.Text                = ToValue<string>(dict["ContractMealPlan"]);
-            ResidentIsKPCheckbox.Checked                = ToValue<bool>(dict["KP"]);
-            ResidentIsFMCheckbox.Checked                = ToValue<bool>(dict["FM"]);
+            ResidentSSNTextBox.Text                     = ToNonNull<int>(dict["SSN"]).ToString("000000000");
+            ResidentPhoneNumTextBox.Text                = ToNonNull<string>(dict["PhoneN"]);
+            ResidentNameTextBox.Text                    = ToNonNull<string>(dict["Name"]);
+            ResidentOutstandingBalanceNUD.Value         = ToNonNull<int>(dict["OutstandingBalance"]);
+            ResidentChoresMissedNUD.Value               = ToNonNull<int>(dict["MissedChores"]);
+            ResidentSmallGroupTextBox.Text              = ToNonNull<string>(dict["SmallGroup"]);
+            ResidentNextSemesterTextBox.Text            = ToNonNull<string>(dict["NextSemesterPlan"]);
+            ResidentGraduationDatetimePicker.Value      = ToNonNull<DateTime>(dict["GradDate"]);
+            ResidentContractStartDatetimePicker.Value   = ToNonNull<DateTime>(dict["ContractStartDate"]);
+            ResidentContractEndDatetimePicker.Value     = ToNonNull<DateTime>(dict["ContractEndDate"]);
+            ResidentMealPlanTextBox.Text                = ToNonNull<string>(dict["ContractMealPlan"]);
+            ResidentIsKPCheckbox.Checked                = ToNonNull<bool>(dict["KP"]);
+            ResidentIsFMCheckbox.Checked                = ToNonNull<bool>(dict["FM"]);
 
             ResidentAssignedRoomNumTextBox.Text = Resident.GetAssignedRoom((int)dict["SSN"], dataWrapper).ToString();
         }
 
-        private void UpdateRoomUI(Dictionary<string, object> roomAttribs)
+        private void UpdateRoomUI(Dictionary<string, object> dict)
         {
-            RoomNumberNUD.Value = int.Parse(roomAttribs["RoomNumber"].ToString());
-            RoomChoreSetTextBox.Text = roomAttribs["ChoreSet"].ToString();
-            RoomWorkOrdersTextBox.Text = roomAttribs["WorkOrders"].ToString();
-            RoomMeetingTimeTextBox.Text = roomAttribs["RoomMeetingTime"].ToString();
-            RoomLeaderSSNTextBox.Text = (int.Parse(roomAttribs["RLSSN"].ToString())).ToString("000000000");
+            RoomNumberNUD.Value         = ToNonNull<int>(dict["RoomNumber"]);
+            RoomChoreSetTextBox.Text    = ToNonNull<string>(dict["ChoreSet"]);
+            RoomWorkOrdersTextBox.Text  = ToNonNull<string>(dict["WorkOrders"]);
+            RoomMeetingTimeTextBox.Text = ToNonNull<string>(dict["RoomMeetingTime"]);   
+            RoomLeaderSSNTextBox.Text   = ToNonNull<int>(dict["RLSSN"]).ToString("000000000");
 
             RoomSectionTextBox.Text = Room.GetSection((int)RoomNumberNUD.Value, dataWrapper);
         }
 
-        private void UpdateSectionUI(Dictionary<string, object> sectionAttribs)
+        private void UpdateSectionUI(Dictionary<string, object> dict)
         {
-            SectionNameTextBox.Text = sectionAttribs["Name"].ToString();
-            SectionPointsNUD.Value = int.Parse(sectionAttribs["Points"].ToString());
-            SectionRASSNNUD.Value = int.Parse(sectionAttribs["RASSN"].ToString());
+            SectionNameTextBox.Text = ToNonNull<string>(dict["Name"]);
+            SectionPointsNUD.Value  = ToNonNull<int>(dict["Points"]);
+            SectionRASSNNUD.Value   = ToNonNull<int>(dict["RASSN"].ToString());
         }
 
         private void AddResidentBtn_Click(object sender, EventArgs e)
@@ -249,12 +249,45 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void AddRoomBtn_Click(object sender, EventArgs e)
+        {
+            var form = new CreateRoomForm();
+            var result = form.ShowDialog();
+            var roomNum = form.RoomNumber;
+            if (result == DialogResult.OK)
+            {
+                Room.AddRoom(roomNum, form.ChoreSet, form.RoomMeetingTime, form.RoomLeaderSSN, dataWrapper);
+                InitUI();
+                RoomListBox.SelectedItem = roomNum.ToString();
+            }
+        }
+
         private void ResidentDeleteBtn_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(this, "Are you sure you want to delete this resident?", "Are you sure?", MessageBoxButtons.YesNo);
             if(result == DialogResult.Yes)
             {
                 Resident.DeleteResident(int.Parse(ResidentListBox.SelectedItem.ToString()), dataWrapper);
+                InitUI();
+            }
+        }
+
+        private void RoomDeleteBtn_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(this, "Are you sure you want to delete this room?", "Are you sure?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                Room.DeleteRoom(int.Parse(RoomListBox.SelectedItem.ToString()), dataWrapper);
+                InitUI();
+            }
+        }
+
+        private void SectionDeleteBtn_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(this, "Are you sure you want to delete this section?", "Are you sure?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                Section.DeleteSection(SectionListBox.SelectedItem.ToString(), dataWrapper);
                 InitUI();
             }
         }

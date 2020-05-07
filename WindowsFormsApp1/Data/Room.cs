@@ -49,7 +49,15 @@ namespace DBFinalProj.Data
 
         public static string GetSection(int roomNum, DataWrapper dw)
         {
-            return dw.GetRow("RoomNum", roomNum, "BELONGS_TO")["SectionName"].ToString();
+            var attribs = dw.GetRow("RoomNum", roomNum, "BELONGS_TO");
+            if (attribs.ContainsKey("SectionName"))
+            {
+                return attribs["SectionName"].ToString();
+            }
+            else
+            {
+                return "N/A";
+            }
         }
 
         public static void DeleteRoom(int roomNum, DataWrapper dw)

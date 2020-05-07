@@ -112,6 +112,12 @@
     <Compile Include="Forms\CreateResidentForm.Designer.cs">
       <DependentUpon>CreateResidentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CreateRoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateRoomForm.Designer.cs">
+      <DependentUpon>CreateRoomForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ErrorDispForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreateResidentForm.resx">
       <DependentUpon>CreateResidentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateRoomForm.resx">
+      <DependentUpon>CreateRoomForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ErrorDispForm.resx">
       <DependentUpon>ErrorDispForm.cs</DependentUpon>

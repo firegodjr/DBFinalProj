@@ -64,7 +64,7 @@
             this.CancelBtn.Location = new System.Drawing.Point(222, 137);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.CancelBtn.TabIndex = 2;
+            this.CancelBtn.TabIndex = 5;
             this.CancelBtn.Text = "Cancel";
             this.CancelBtn.UseVisualStyleBackColor = true;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
@@ -74,7 +74,7 @@
             this.OKBtn.Location = new System.Drawing.Point(137, 137);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 3;
+            this.OKBtn.TabIndex = 4;
             this.OKBtn.Text = "OK";
             this.OKBtn.UseVisualStyleBackColor = true;
             this.OKBtn.Click += new System.EventHandler(this.OKBtn_Click);
@@ -93,7 +93,7 @@
             this.ResidentNameTextBox.Location = new System.Drawing.Point(100, 59);
             this.ResidentNameTextBox.Name = "ResidentNameTextBox";
             this.ResidentNameTextBox.Size = new System.Drawing.Size(197, 20);
-            this.ResidentNameTextBox.TabIndex = 4;
+            this.ResidentNameTextBox.TabIndex = 1;
             // 
             // ContractStartDatetime
             // 
@@ -102,7 +102,7 @@
             this.ContractStartDatetime.Location = new System.Drawing.Point(100, 85);
             this.ContractStartDatetime.Name = "ContractStartDatetime";
             this.ContractStartDatetime.Size = new System.Drawing.Size(128, 20);
-            this.ContractStartDatetime.TabIndex = 8;
+            this.ContractStartDatetime.TabIndex = 2;
             // 
             // label3
             // 
@@ -129,7 +129,7 @@
             this.ContractEndDatetime.Location = new System.Drawing.Point(100, 111);
             this.ContractEndDatetime.Name = "ContractEndDatetime";
             this.ContractEndDatetime.Size = new System.Drawing.Size(128, 20);
-            this.ContractEndDatetime.TabIndex = 10;
+            this.ContractEndDatetime.TabIndex = 3;
             // 
             // label5
             // 
