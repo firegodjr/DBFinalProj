@@ -29,7 +29,7 @@ namespace DBFinalProj.Data
             return SSNs.ToArray();
         }
 
-        public static void AddRoom(int roomNum, string choreSet, string roomMeetingTime, int roomLeaderSSN, DataWrapper dw)
+        public static void AddRoom(int roomNum, string choreSet, string roomMeetingTime, int roomLeaderSSN, string sectionName, DataWrapper dw)
         {
             var attribs = new Dictionary<string, object>();
             attribs.Add("RoomNumber", roomNum);
@@ -37,6 +37,11 @@ namespace DBFinalProj.Data
             attribs.Add("RoomMeetingTime", roomMeetingTime);
             attribs.Add("RLSSN", roomLeaderSSN);
             dw.InsertRow("ROOM", attribs);
+
+            var relationRow = new Dictionary<string, object>();
+            relationRow.Add("RoomNum", roomNum);
+            relationRow.Add("SectionName", sectionName);
+            dw.InsertRow("BELONGS_TO", relationRow);
         }
 
         /// <summary>

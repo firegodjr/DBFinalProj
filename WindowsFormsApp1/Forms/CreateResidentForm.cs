@@ -24,19 +24,18 @@ namespace DBFinalProj.Forms
 
         private void OKBtn_Click(object sender, EventArgs e)
         {
-            int ssn;
-            if(int.TryParse(SSNTextBox.Text, out ssn))
+            try
             {
-                SSN = ssn;
+                SSN = int.Parse(SSNTextBox.Text);
                 ResidentName = ResidentNameTextBox.Text;
                 StartDate = DataWrapper.GetSqlDateString(ContractStartDatetime.Value);
                 EndDate = DataWrapper.GetSqlDateString(ContractEndDatetime.Value);
                 DialogResult = DialogResult.OK;
                 Close();
             }
-            else
+            catch
             {
-                MessageBox.Show("SSN must be an integer value");
+                MessageBox.Show("Unable to create resident. Please ensure that all fields were filled out, and that the resident's SSN is unique.");
             }
         }
 

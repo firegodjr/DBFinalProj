@@ -251,12 +251,12 @@ namespace WindowsFormsApp1
 
         private void AddRoomBtn_Click(object sender, EventArgs e)
         {
-            var form = new CreateRoomForm();
+            var form = new CreateRoomForm(Resident.GetAllResidents(dataWrapper), Section.GetAllSections(dataWrapper));
             var result = form.ShowDialog();
             var roomNum = form.RoomNumber;
             if (result == DialogResult.OK)
             {
-                Room.AddRoom(roomNum, form.ChoreSet, form.RoomMeetingTime, form.RoomLeaderSSN, dataWrapper);
+                Room.AddRoom(roomNum, form.ChoreSet, form.RoomMeetingTime, form.RoomLeaderSSN, form.SectionName, dataWrapper);
                 InitUI();
                 RoomListBox.SelectedItem = roomNum.ToString();
             }

@@ -38,9 +38,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.MeetingTimeTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.RoomLeaderSSNTextBox = new System.Windows.Forms.TextBox();
             this.HouseSectionComboBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.RoomLeaderSSNComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label5
@@ -132,15 +132,6 @@
             this.label4.TabIndex = 27;
             this.label4.Text = "Room Leader SSN";
             // 
-            // RoomLeaderSSNTextBox
-            // 
-            this.RoomLeaderSSNTextBox.Location = new System.Drawing.Point(119, 111);
-            this.RoomLeaderSSNTextBox.MaxLength = 9;
-            this.RoomLeaderSSNTextBox.Name = "RoomLeaderSSNTextBox";
-            this.RoomLeaderSSNTextBox.Size = new System.Drawing.Size(109, 20);
-            this.RoomLeaderSSNTextBox.TabIndex = 26;
-            this.RoomLeaderSSNTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericTextboxKeypress);
-            // 
             // HouseSectionComboBox
             // 
             this.HouseSectionComboBox.FormattingEnabled = true;
@@ -158,6 +149,14 @@
             this.label6.TabIndex = 33;
             this.label6.Text = "House Section";
             // 
+            // RoomLeaderSSNComboBox
+            // 
+            this.RoomLeaderSSNComboBox.FormattingEnabled = true;
+            this.RoomLeaderSSNComboBox.Location = new System.Drawing.Point(119, 111);
+            this.RoomLeaderSSNComboBox.Name = "RoomLeaderSSNComboBox";
+            this.RoomLeaderSSNComboBox.Size = new System.Drawing.Size(178, 21);
+            this.RoomLeaderSSNComboBox.TabIndex = 34;
+            // 
             // CreateRoomForm
             // 
             this.AcceptButton = this.OKBtn;
@@ -165,10 +164,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(311, 215);
+            this.Controls.Add(this.RoomLeaderSSNComboBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.HouseSectionComboBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.RoomLeaderSSNTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.MeetingTimeTextBox);
             this.Controls.Add(this.label5);
@@ -197,8 +196,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox MeetingTimeTextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox RoomLeaderSSNTextBox;
         private System.Windows.Forms.ComboBox HouseSectionComboBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox RoomLeaderSSNComboBox;
     }
 }

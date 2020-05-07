@@ -16,10 +16,13 @@ namespace DBFinalProj.Forms
         public string ChoreSet;
         public string RoomMeetingTime;
         public int RoomLeaderSSN;
+        public string SectionName;
 
-        public CreateRoomForm()
+        public CreateRoomForm(int[] residentSSNs, string[] houseSections)
         {
             InitializeComponent();
+            RoomLeaderSSNComboBox.Items.AddRange(residentSSNs.Select(ssn => ssn.ToString("000000000")).ToArray());
+            HouseSectionComboBox.Items.AddRange(houseSections);
         }
 
         // Filters keypress events based on whether or not the pressed key was numeric
@@ -33,12 +36,20 @@ namespace DBFinalProj.Forms
 
         private void OKBtn_Click(object sender, EventArgs e)
         {
-            RoomNumber = int.Parse(RoomNumTextBox.Text);
-            ChoreSet = ChoreSetTextBox.Text;
-            RoomMeetingTime = MeetingTimeTextBox.Text;
-            RoomLeaderSSN = int.Parse(RoomLeaderSSNTextBox.Text);
-            DialogResult = DialogResult.OK;
-            Close();
+            try
+            {
+                RoomNumber = int.Parse(RoomNumTextBox.Text);
+                ChoreSet = ChoreSetTextBox.Text;
+                RoomMeetingTime = MeetingTimeTextBox.Text;
+                RoomLeaderSSN = int.Parse(RoomLeaderSSNComboBox.SelectedItem.ToString());
+                SectionName = HouseSectionComboBox.SelectedItem.ToString();
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch
+            {
+                MessageBox.Show("Unable to create room. Please ensure that all fields were filled out, and that the room number is unique.");
+            }
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)
