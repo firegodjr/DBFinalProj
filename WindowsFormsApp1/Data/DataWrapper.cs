@@ -127,7 +127,8 @@ namespace DBFinalProj
             sql += "SET ";
             foreach (KeyValuePair<string, object> kv in row)
             {
-                sql += $"{kv.Key} = {kv.Value.ToString()},";
+                string valQuote = (kv.Value.GetType() == typeof(string) ? "\"" : "");
+                sql += $"{kv.Key} = {valQuote}{kv.Value.ToString()}{valQuote},";
             }
             sql = sql.TrimEnd(',');
             sql += $" WHERE {keyName} = {quote}{key.ToString()}{quote};";

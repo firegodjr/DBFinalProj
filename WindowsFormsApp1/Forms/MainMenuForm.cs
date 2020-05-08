@@ -46,9 +46,12 @@ namespace WindowsFormsApp1
             RoomListBox.Items.AddRange(stringRoomNums.ToArray());
             SectionListBox.Items.AddRange(stringSectionNames);
 
-            ResidentListBox.SelectedIndex = 0;
-            RoomListBox.SelectedIndex = 0;
-            SectionListBox.SelectedIndex = 0;
+            if (ResidentListBox.Items.Count > 0)
+                ResidentListBox.SelectedIndex = 0;
+            if (RoomListBox.Items.Count > 0)
+                RoomListBox.SelectedIndex = 0;
+            if (SectionListBox.Items.Count > 0)
+                SectionListBox.SelectedIndex = 0;
         }
 
         private void PickDatabase()
@@ -116,7 +119,15 @@ namespace WindowsFormsApp1
         {
             PickDatabase();
             TryLogin();
-            InitUI();
+
+            if(dataWrapper != null)
+            {
+                InitUI();
+            }
+            else
+            {
+                Close();
+            }
         }
 
         // Runs when form is closing
@@ -215,25 +226,45 @@ namespace WindowsFormsApp1
             ResidentIsKPCheckbox.Checked                = ToNonNull<bool>(dict["KP"]);
             ResidentIsFMCheckbox.Checked                = ToNonNull<bool>(dict["FM"]);
 
-            ResidentAssignedRoomNumTextBox.Text = Resident.GetAssignedRoom((int)dict["SSN"], dataWrapper).ToString();
+            var rooms = Room.GetAllRooms(dataWrapper).Select(num => num.ToString());
+            ResidentAssignedRoomComboBox.Items.Clear();
+            ResidentAssignedRoomComboBox.Items.Add("N/A");
+            ResidentAssignedRoomComboBox.Items.AddRange(rooms.ToArray());
+            var assignedRoom = Resident.GetAssignedRoom((int)dict["SSN"], dataWrapper).ToString();
+            if (assignedRoom == "0") assignedRoom = "N/A";
+            ResidentAssignedRoomComboBox.SelectedItem = assignedRoom;
         }
 
         private void UpdateRoomUI(Dictionary<string, object> dict)
         {
-            RoomNumberNUD.Value         = ToNonNull<int>(dict["RoomNumber"]);
-            RoomChoreSetTextBox.Text    = ToNonNull<string>(dict["ChoreSet"]);
-            RoomWorkOrdersTextBox.Text  = ToNonNull<string>(dict["WorkOrders"]);
-            RoomMeetingTimeTextBox.Text = ToNonNull<string>(dict["RoomMeetingTime"]);   
-            RoomLeaderSSNTextBox.Text   = ToNonNull<int>(dict["RLSSN"]).ToString("000000000");
+            RoomLeaderSSNComboBox.Items.Clear();
+            RoomLeaderSSNComboBox.Items.Add("N/A");
+            RoomSectionComboBox.Items.Clear();
 
-            RoomSectionTextBox.Text = Room.GetSection((int)RoomNumberNUD.Value, dataWrapper);
+            var SSNStrings = Resident.GetAllResidents(dataWrapper).Select(ssn => ssn.ToString("000000000"));
+            RoomLeaderSSNComboBox.Items.AddRange(SSNStrings.ToArray());
+            RoomSectionComboBox.Items.AddRange(Section.GetAllSections(dataWrapper));
+
+            RoomNumberTextBox.Text              = ToNonNull<int>(dict["RoomNumber"]).ToString();
+            RoomChoreSetTextBox.Text            = ToNonNull<string>(dict["ChoreSet"]);
+            RoomWorkOrdersTextBox.Text          = ToNonNull<string>(dict["WorkOrders"]);
+            RoomMeetingTimeTextBox.Text         = ToNonNull<string>(dict["RoomMeetingTime"]);   
+            RoomLeaderSSNComboBox.SelectedItem  = ToNonNull<int>(dict["RLSSN"]).ToString("000000000");
+
+            RoomSectionComboBox.SelectedItem = Room.GetSection(int.Parse(RoomNumberTextBox.Text), dataWrapper);
         }
 
         private void UpdateSectionUI(Dictionary<string, object> dict)
         {
+            RASSNComboBox.Items.Clear();
+            RASSNComboBox.Items.Add("N/A");
+
+            var SSNStrings = Resident.GetAllResidents(dataWrapper).Select(ssn => ssn.ToString("000000000"));
+            RASSNComboBox.Items.AddRange(SSNStrings.ToArray());
+
             SectionNameTextBox.Text = ToNonNull<string>(dict["Name"]);
             SectionPointsNUD.Value  = ToNonNull<int>(dict["Points"]);
-            SectionRASSNNUD.Value   = ToNonNull<int>(dict["RASSN"].ToString());
+            RASSNComboBox.SelectedItem   = ToNonNull<int>(dict["RASSN"]).ToString("000000000");
         }
 
         private void AddResidentBtn_Click(object sender, EventArgs e)
@@ -243,7 +274,14 @@ namespace WindowsFormsApp1
             var ssn = form.SSN;
             if (result == DialogResult.OK)
             {
-                Resident.AddResident(ssn, form.ResidentName, form.StartDate, form.EndDate, dataWrapper);
+                try
+                {
+                    Resident.AddResident(ssn, form.ResidentName, form.StartDate, form.EndDate, dataWrapper);
+                }
+                    catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred when adding a resident:\n\n" + ex.Message);
+                }
                 InitUI();
                 ResidentListBox.SelectedItem = ssn.ToString();
             }
@@ -256,9 +294,36 @@ namespace WindowsFormsApp1
             var roomNum = form.RoomNumber;
             if (result == DialogResult.OK)
             {
-                Room.AddRoom(roomNum, form.ChoreSet, form.RoomMeetingTime, form.RoomLeaderSSN, form.SectionName, dataWrapper);
+                try
+                {
+                    Room.AddRoom(roomNum, form.ChoreSet, form.RoomMeetingTime, form.RoomLeaderSSN, form.SectionName, dataWrapper);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred when adding a room:\n\n" + ex.Message);
+                }
                 InitUI();
                 RoomListBox.SelectedItem = roomNum.ToString();
+            }
+        }
+
+        private void AddSectionBtn_Click(object sender, EventArgs e)
+        {
+            var form = new CreateSectionForm(Resident.GetAllResidents(dataWrapper));
+            var result = form.ShowDialog();
+            var name = form.SectionName;
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    Section.AddSection(name, form.RASSN, dataWrapper);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred when adding a section:\n\n" + ex.Message);
+                }
+                InitUI();
+                SectionListBox.SelectedItem = name;
             }
         }
 
@@ -290,6 +355,66 @@ namespace WindowsFormsApp1
                 Section.DeleteSection(SectionListBox.SelectedItem.ToString(), dataWrapper);
                 InitUI();
             }
+        }
+
+        private void ResidentSaveBtn_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, object> values = new Dictionary<string, object>();
+
+            if (ResidentPhoneNumTextBox.Text != "")
+            {
+                values.Add("PhoneN", Int64.Parse(ResidentPhoneNumTextBox.Text));
+            }
+            values.Add("Name", ResidentNameTextBox.Text);
+            values.Add("OutstandingBalance", ResidentOutstandingBalanceNUD.Value);
+            values.Add("MissedChores", ResidentChoresMissedNUD.Value);
+            values.Add("SmallGroup", ResidentSmallGroupTextBox.Text);
+            values.Add("NextSemesterPlan", ResidentNextSemesterTextBox.Text);
+            values.Add("GradDate", DataWrapper.GetSqlDateString(ResidentGraduationDatetimePicker.Value));
+            values.Add("ContractStartDate", DataWrapper.GetSqlDateString(ResidentContractStartDatetimePicker.Value));
+            values.Add("ContractEndDate", DataWrapper.GetSqlDateString(ResidentContractEndDatetimePicker.Value));
+            values.Add("ContractMealPlan", ResidentMealPlanTextBox.Text);
+            values.Add("KP", ResidentIsKPCheckbox.Checked);
+            values.Add("FM", ResidentIsFMCheckbox.Checked);
+
+            Resident.UpdateResident(int.Parse(ResidentListBox.SelectedItem.ToString()), values, dataWrapper);
+            if(ResidentAssignedRoomComboBox.SelectedItem.ToString() != "N/A")
+            {
+                Resident.UpdateAssignedRoom(int.Parse(ResidentListBox.SelectedItem.ToString()), int.Parse(ResidentAssignedRoomComboBox.SelectedItem.ToString()), dataWrapper);
+            }
+        }
+
+        private void RoomSaveBtn_Click(object sender, EventArgs e)
+        {
+            var values = new Dictionary<string, object>();
+            var roomNum = int.Parse(RoomListBox.SelectedItem.ToString());
+
+            values.Add("ChoreSet", RoomChoreSetTextBox.Text);
+            values.Add("WorkOrders", RoomWorkOrdersTextBox.Text);
+            values.Add("RoomMeetingTime", RoomMeetingTimeTextBox.Text);
+            values.Add("RLSSN", int.Parse(RoomLeaderSSNComboBox.SelectedItem.ToString()));
+
+            Room.UpdateRoom(roomNum, values, dataWrapper);
+
+            if(RoomSectionComboBox.SelectedItem.ToString() != "N/A")
+            {
+                var sectionName = RoomSectionComboBox.SelectedItem.ToString();
+                Room.UpdateBelongingSection(roomNum, sectionName, dataWrapper);
+            }
+        }
+
+        private void SectionSaveBtn_Click(object sender, EventArgs e)
+        {
+            var values = new Dictionary<string, object>();
+            var sectionName = SectionListBox.SelectedItem.ToString();
+
+            values.Add("Points", SectionPointsNUD.Value);
+            if(RASSNComboBox.SelectedItem.ToString() != "N/A")
+            {
+                values.Add("RASSN", int.Parse(RASSNComboBox.SelectedItem.ToString()));
+            }
+
+            Section.UpdateSection(sectionName, values, dataWrapper);
         }
     }
 }

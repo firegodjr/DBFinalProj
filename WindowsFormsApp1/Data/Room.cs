@@ -65,6 +65,19 @@ namespace DBFinalProj.Data
             }
         }
 
+        public static void UpdateRoom(int roomNum, Dictionary<string, object> values, DataWrapper dw)
+        {
+            dw.UpdateRow("RoomNumber", roomNum, "ROOM", values);
+        }
+
+        public static void UpdateBelongingSection(int roomNum, string sectionName, DataWrapper dw)
+        {
+            var values = new Dictionary<string, object>();
+            values.Add("SectionName", sectionName);
+
+            dw.UpdateRow("RoomNum", roomNum, "BELONGS_TO", values);
+        }
+
         public static void DeleteRoom(int roomNum, DataWrapper dw)
         {
             dw.DeleteRow("RoomNumber", roomNum, "ROOM");

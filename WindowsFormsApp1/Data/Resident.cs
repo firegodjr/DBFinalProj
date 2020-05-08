@@ -63,6 +63,26 @@ namespace DBFinalProj.Data
             }
         }
 
+        public static void UpdateResident(int ssn, Dictionary<string, object> values, DataWrapper dw)
+        {
+            dw.UpdateRow("SSN", ssn, "RESIDENT", values);
+        }
+
+        public static void UpdateAssignedRoom(int ssn, int assignedRoom, DataWrapper dw)
+        {
+            if(GetAssignedRoom(ssn, dw) == 0)
+            {
+                var assignedRow = new Dictionary<string, object>();
+                assignedRow.Add("ResidentSSN", ssn);
+                assignedRow.Add("RoomNum", assignedRoom);
+                dw.InsertRow("ASSIGNED_TO", assignedRow);
+            }
+
+            var values = new Dictionary<string, object>();
+            values.Add("RoomNum", assignedRoom);
+            dw.UpdateRow("ResidentSSN", ssn, "ASSIGNED_TO", values);
+        }
+
         public static void DeleteResident(int ssn, DataWrapper dw)
         {
             dw.DeleteRow("SSN", ssn, "RESIDENT");

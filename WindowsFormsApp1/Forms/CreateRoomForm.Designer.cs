@@ -65,6 +65,7 @@
             // ChoreSetTextBox
             // 
             this.ChoreSetTextBox.Location = new System.Drawing.Point(100, 59);
+            this.ChoreSetTextBox.MaxLength = 10;
             this.ChoreSetTextBox.Name = "ChoreSetTextBox";
             this.ChoreSetTextBox.Size = new System.Drawing.Size(197, 20);
             this.ChoreSetTextBox.TabIndex = 17;
@@ -119,6 +120,7 @@
             // MeetingTimeTextBox
             // 
             this.MeetingTimeTextBox.Location = new System.Drawing.Point(100, 85);
+            this.MeetingTimeTextBox.MaxLength = 30;
             this.MeetingTimeTextBox.Name = "MeetingTimeTextBox";
             this.MeetingTimeTextBox.Size = new System.Drawing.Size(197, 20);
             this.MeetingTimeTextBox.TabIndex = 24;

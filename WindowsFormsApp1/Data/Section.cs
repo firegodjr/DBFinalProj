@@ -29,12 +29,26 @@ namespace DBFinalProj.Data
             return names.ToArray();
         }
 
+        public static void AddSection(string sectionName, int RASSN, DataWrapper dw)
+        {
+            var attribs = new Dictionary<string, object>();
+            attribs.Add("Name", sectionName);
+            attribs.Add("Points", 0);
+            attribs.Add("RASSN", RASSN);
+            dw.InsertRow("HOUSE_SECTION", attribs);
+        }
+
         /// <summary>
         /// Gets room attributes given the room number
         /// </summary>
         public static Dictionary<string, object> GetSection(string sectionName, DataWrapper dw)
         {
             return dw.GetRow("Name", sectionName, "HOUSE_SECTION");
+        }
+
+        public static void UpdateSection(string sectionName, Dictionary<string, object> values, DataWrapper dw)
+        {
+            dw.UpdateRow("Name", sectionName, "HOUSE_SECTION", values);
         }
 
         public static void DeleteSection(string sectionName, DataWrapper dw)

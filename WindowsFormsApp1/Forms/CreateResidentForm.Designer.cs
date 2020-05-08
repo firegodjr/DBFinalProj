@@ -44,6 +44,7 @@
             // SSNTextBox
             // 
             this.SSNTextBox.Location = new System.Drawing.Point(100, 33);
+            this.SSNTextBox.MaxLength = 9;
             this.SSNTextBox.Name = "SSNTextBox";
             this.SSNTextBox.Size = new System.Drawing.Size(128, 20);
             this.SSNTextBox.TabIndex = 0;
@@ -91,6 +92,7 @@
             // ResidentNameTextBox
             // 
             this.ResidentNameTextBox.Location = new System.Drawing.Point(100, 59);
+            this.ResidentNameTextBox.MaxLength = 30;
             this.ResidentNameTextBox.Name = "ResidentNameTextBox";
             this.ResidentNameTextBox.Size = new System.Drawing.Size(197, 20);
             this.ResidentNameTextBox.TabIndex = 1;

@@ -32,10 +32,10 @@
             this.tabResident = new System.Windows.Forms.TabPage();
             this.AddResidentBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.ResidentAssignedRoomComboBox = new System.Windows.Forms.ComboBox();
+            this.ResidentSaveBtn = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.ResidentNextSemesterTextBox = new System.Windows.Forms.TextBox();
-            this.ResidentAssignedRoomNumTextBox = new System.Windows.Forms.TextBox();
             this.ResidentMealPlanTextBox = new System.Windows.Forms.TextBox();
             this.ResidentIsFMCheckbox = new System.Windows.Forms.CheckBox();
             this.ResidentContractEndDatetimePicker = new System.Windows.Forms.DateTimePicker();
@@ -64,14 +64,14 @@
             this.tabRoom = new System.Windows.Forms.TabPage();
             this.AddRoomBtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.RoomSectionComboBox = new System.Windows.Forms.ComboBox();
+            this.RoomLeaderSSNComboBox = new System.Windows.Forms.ComboBox();
+            this.RoomNumberTextBox = new System.Windows.Forms.TextBox();
+            this.RoomSaveBtn = new System.Windows.Forms.Button();
             this.RoomDeleteBtn = new System.Windows.Forms.Button();
-            this.RoomSectionTextBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.RoomMeetingTimeTextBox = new System.Windows.Forms.TextBox();
-            this.RoomLeaderSSNTextBox = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.RoomNumberNUD = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.RoomWorkOrdersTextBox = new System.Windows.Forms.TextBox();
@@ -82,9 +82,9 @@
             this.tabSection = new System.Windows.Forms.TabPage();
             this.AddSectionBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.RASSNComboBox = new System.Windows.Forms.ComboBox();
+            this.SectionSaveBtn = new System.Windows.Forms.Button();
             this.SectionDeleteBtn = new System.Windows.Forms.Button();
-            this.SectionRASSNNUD = new System.Windows.Forms.NumericUpDown();
             this.label20 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.SectionNameTextBox = new System.Windows.Forms.TextBox();
@@ -98,10 +98,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ResidentChoresMissedNUD)).BeginInit();
             this.tabRoom.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.RoomNumberNUD)).BeginInit();
             this.tabSection.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SectionRASSNNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SectionPointsNUD)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,12 +110,12 @@
             this.ClassSelectorTabCtrl.Controls.Add(this.tabSection);
             this.ClassSelectorTabCtrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.ClassSelectorTabCtrl.HotTrack = true;
-            this.ClassSelectorTabCtrl.Location = new System.Drawing.Point(13, 42);
+            this.ClassSelectorTabCtrl.Location = new System.Drawing.Point(13, 12);
             this.ClassSelectorTabCtrl.Multiline = true;
             this.ClassSelectorTabCtrl.Name = "ClassSelectorTabCtrl";
             this.ClassSelectorTabCtrl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ClassSelectorTabCtrl.SelectedIndex = 0;
-            this.ClassSelectorTabCtrl.Size = new System.Drawing.Size(890, 601);
+            this.ClassSelectorTabCtrl.Size = new System.Drawing.Size(890, 602);
             this.ClassSelectorTabCtrl.TabIndex = 0;
             // 
             // tabResident
@@ -130,7 +128,7 @@
             this.tabResident.Location = new System.Drawing.Point(4, 25);
             this.tabResident.Name = "tabResident";
             this.tabResident.Padding = new System.Windows.Forms.Padding(3);
-            this.tabResident.Size = new System.Drawing.Size(882, 572);
+            this.tabResident.Size = new System.Drawing.Size(882, 573);
             this.tabResident.TabIndex = 0;
             this.tabResident.Text = "Resident";
             // 
@@ -147,10 +145,10 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.ResidentAssignedRoomComboBox);
+            this.groupBox1.Controls.Add(this.ResidentSaveBtn);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.ResidentNextSemesterTextBox);
-            this.groupBox1.Controls.Add(this.ResidentAssignedRoomNumTextBox);
             this.groupBox1.Controls.Add(this.ResidentMealPlanTextBox);
             this.groupBox1.Controls.Add(this.ResidentIsFMCheckbox);
             this.groupBox1.Controls.Add(this.ResidentContractEndDatetimePicker);
@@ -182,14 +180,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Resident Attributes";
             // 
-            // button3
+            // ResidentAssignedRoomComboBox
             // 
-            this.button3.Location = new System.Drawing.Point(421, 359);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(109, 23);
-            this.button3.TabIndex = 33;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = true;
+            this.ResidentAssignedRoomComboBox.FormattingEnabled = true;
+            this.ResidentAssignedRoomComboBox.Location = new System.Drawing.Point(182, 145);
+            this.ResidentAssignedRoomComboBox.Name = "ResidentAssignedRoomComboBox";
+            this.ResidentAssignedRoomComboBox.Size = new System.Drawing.Size(121, 23);
+            this.ResidentAssignedRoomComboBox.TabIndex = 34;
+            // 
+            // ResidentSaveBtn
+            // 
+            this.ResidentSaveBtn.Location = new System.Drawing.Point(421, 359);
+            this.ResidentSaveBtn.Name = "ResidentSaveBtn";
+            this.ResidentSaveBtn.Size = new System.Drawing.Size(109, 23);
+            this.ResidentSaveBtn.TabIndex = 33;
+            this.ResidentSaveBtn.Text = "Save";
+            this.ResidentSaveBtn.UseVisualStyleBackColor = true;
+            this.ResidentSaveBtn.Click += new System.EventHandler(this.ResidentSaveBtn_Click);
             // 
             // button4
             // 
@@ -205,22 +212,16 @@
             // 
             this.ResidentNextSemesterTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResidentNextSemesterTextBox.Location = new System.Drawing.Point(168, 219);
+            this.ResidentNextSemesterTextBox.MaxLength = 50;
             this.ResidentNextSemesterTextBox.Name = "ResidentNextSemesterTextBox";
             this.ResidentNextSemesterTextBox.Size = new System.Drawing.Size(387, 22);
             this.ResidentNextSemesterTextBox.TabIndex = 31;
-            // 
-            // ResidentAssignedRoomNumTextBox
-            // 
-            this.ResidentAssignedRoomNumTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResidentAssignedRoomNumTextBox.Location = new System.Drawing.Point(182, 145);
-            this.ResidentAssignedRoomNumTextBox.Name = "ResidentAssignedRoomNumTextBox";
-            this.ResidentAssignedRoomNumTextBox.Size = new System.Drawing.Size(121, 22);
-            this.ResidentAssignedRoomNumTextBox.TabIndex = 30;
             // 
             // ResidentMealPlanTextBox
             // 
             this.ResidentMealPlanTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResidentMealPlanTextBox.Location = new System.Drawing.Point(182, 116);
+            this.ResidentMealPlanTextBox.MaxLength = 20;
             this.ResidentMealPlanTextBox.Name = "ResidentMealPlanTextBox";
             this.ResidentMealPlanTextBox.Size = new System.Drawing.Size(121, 22);
             this.ResidentMealPlanTextBox.TabIndex = 29;
@@ -240,9 +241,10 @@
             // ResidentContractEndDatetimePicker
             // 
             this.ResidentContractEndDatetimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResidentContractEndDatetimePicker.Location = new System.Drawing.Point(333, 85);
+            this.ResidentContractEndDatetimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.ResidentContractEndDatetimePicker.Location = new System.Drawing.Point(219, 84);
             this.ResidentContractEndDatetimePicker.Name = "ResidentContractEndDatetimePicker";
-            this.ResidentContractEndDatetimePicker.Size = new System.Drawing.Size(222, 22);
+            this.ResidentContractEndDatetimePicker.Size = new System.Drawing.Size(106, 22);
             this.ResidentContractEndDatetimePicker.TabIndex = 27;
             // 
             // ResidentIsKPCheckbox
@@ -261,6 +263,7 @@
             // 
             this.ResidentSmallGroupTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResidentSmallGroupTextBox.Location = new System.Drawing.Point(106, 305);
+            this.ResidentSmallGroupTextBox.MaxLength = 50;
             this.ResidentSmallGroupTextBox.Name = "ResidentSmallGroupTextBox";
             this.ResidentSmallGroupTextBox.Size = new System.Drawing.Size(133, 22);
             this.ResidentSmallGroupTextBox.TabIndex = 23;
@@ -368,7 +371,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(308, 89);
+            this.label5.Location = new System.Drawing.Point(194, 89);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(19, 16);
             this.label5.TabIndex = 8;
@@ -387,9 +390,10 @@
             // ResidentContractStartDatetimePicker
             // 
             this.ResidentContractStartDatetimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResidentContractStartDatetimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.ResidentContractStartDatetimePicker.Location = new System.Drawing.Point(81, 84);
             this.ResidentContractStartDatetimePicker.Name = "ResidentContractStartDatetimePicker";
-            this.ResidentContractStartDatetimePicker.Size = new System.Drawing.Size(222, 22);
+            this.ResidentContractStartDatetimePicker.Size = new System.Drawing.Size(107, 22);
             this.ResidentContractStartDatetimePicker.TabIndex = 6;
             // 
             // label3
@@ -406,9 +410,9 @@
             // 
             this.ResidentPhoneNumTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResidentPhoneNumTextBox.Location = new System.Drawing.Point(74, 58);
-            this.ResidentPhoneNumTextBox.MaxLength = 9;
+            this.ResidentPhoneNumTextBox.MaxLength = 10;
             this.ResidentPhoneNumTextBox.Name = "ResidentPhoneNumTextBox";
-            this.ResidentPhoneNumTextBox.Size = new System.Drawing.Size(100, 22);
+            this.ResidentPhoneNumTextBox.Size = new System.Drawing.Size(137, 22);
             this.ResidentPhoneNumTextBox.TabIndex = 4;
             this.ResidentPhoneNumTextBox.Tag = "";
             this.ResidentPhoneNumTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericTextboxKeypress);
@@ -417,7 +421,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(191, 34);
+            this.label2.Location = new System.Drawing.Point(211, 34);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 16);
             this.label2.TabIndex = 3;
@@ -426,7 +430,8 @@
             // ResidentNameTextBox
             // 
             this.ResidentNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResidentNameTextBox.Location = new System.Drawing.Point(241, 31);
+            this.ResidentNameTextBox.Location = new System.Drawing.Point(261, 31);
+            this.ResidentNameTextBox.MaxLength = 30;
             this.ResidentNameTextBox.Name = "ResidentNameTextBox";
             this.ResidentNameTextBox.Size = new System.Drawing.Size(165, 22);
             this.ResidentNameTextBox.TabIndex = 2;
@@ -447,6 +452,7 @@
             this.ResidentSSNTextBox.Location = new System.Drawing.Point(56, 31);
             this.ResidentSSNTextBox.MaxLength = 9;
             this.ResidentSSNTextBox.Name = "ResidentSSNTextBox";
+            this.ResidentSSNTextBox.ReadOnly = true;
             this.ResidentSSNTextBox.Size = new System.Drawing.Size(100, 22);
             this.ResidentSSNTextBox.TabIndex = 0;
             this.ResidentSSNTextBox.Tag = "";
@@ -471,7 +477,7 @@
             this.tabRoom.Location = new System.Drawing.Point(4, 25);
             this.tabRoom.Name = "tabRoom";
             this.tabRoom.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRoom.Size = new System.Drawing.Size(882, 572);
+            this.tabRoom.Size = new System.Drawing.Size(882, 573);
             this.tabRoom.TabIndex = 1;
             this.tabRoom.Text = "Room";
             // 
@@ -487,14 +493,14 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.RoomSectionComboBox);
+            this.groupBox2.Controls.Add(this.RoomLeaderSSNComboBox);
+            this.groupBox2.Controls.Add(this.RoomNumberTextBox);
+            this.groupBox2.Controls.Add(this.RoomSaveBtn);
             this.groupBox2.Controls.Add(this.RoomDeleteBtn);
-            this.groupBox2.Controls.Add(this.RoomSectionTextBox);
             this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.RoomMeetingTimeTextBox);
-            this.groupBox2.Controls.Add(this.RoomLeaderSSNTextBox);
             this.groupBox2.Controls.Add(this.label18);
-            this.groupBox2.Controls.Add(this.RoomNumberNUD);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.RoomWorkOrdersTextBox);
@@ -509,14 +515,43 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Room Attributes";
             // 
-            // button2
+            // RoomSectionComboBox
             // 
-            this.button2.Location = new System.Drawing.Point(421, 529);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
+            this.RoomSectionComboBox.FormattingEnabled = true;
+            this.RoomSectionComboBox.Location = new System.Drawing.Point(155, 122);
+            this.RoomSectionComboBox.Name = "RoomSectionComboBox";
+            this.RoomSectionComboBox.Size = new System.Drawing.Size(164, 23);
+            this.RoomSectionComboBox.TabIndex = 21;
+            // 
+            // RoomLeaderSSNComboBox
+            // 
+            this.RoomLeaderSSNComboBox.FormattingEnabled = true;
+            this.RoomLeaderSSNComboBox.Location = new System.Drawing.Point(155, 93);
+            this.RoomLeaderSSNComboBox.Name = "RoomLeaderSSNComboBox";
+            this.RoomLeaderSSNComboBox.Size = new System.Drawing.Size(164, 23);
+            this.RoomLeaderSSNComboBox.TabIndex = 20;
+            // 
+            // RoomNumberTextBox
+            // 
+            this.RoomNumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RoomNumberTextBox.Location = new System.Drawing.Point(121, 31);
+            this.RoomNumberTextBox.MaxLength = 3;
+            this.RoomNumberTextBox.Name = "RoomNumberTextBox";
+            this.RoomNumberTextBox.ReadOnly = true;
+            this.RoomNumberTextBox.Size = new System.Drawing.Size(100, 22);
+            this.RoomNumberTextBox.TabIndex = 19;
+            this.RoomNumberTextBox.Tag = "";
+            this.RoomNumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericTextboxKeypress);
+            // 
+            // RoomSaveBtn
+            // 
+            this.RoomSaveBtn.Location = new System.Drawing.Point(421, 529);
+            this.RoomSaveBtn.Name = "RoomSaveBtn";
+            this.RoomSaveBtn.Size = new System.Drawing.Size(109, 23);
+            this.RoomSaveBtn.TabIndex = 18;
+            this.RoomSaveBtn.Text = "Save";
+            this.RoomSaveBtn.UseVisualStyleBackColor = true;
+            this.RoomSaveBtn.Click += new System.EventHandler(this.RoomSaveBtn_Click);
             // 
             // RoomDeleteBtn
             // 
@@ -527,16 +562,6 @@
             this.RoomDeleteBtn.Text = "Delete";
             this.RoomDeleteBtn.UseVisualStyleBackColor = true;
             this.RoomDeleteBtn.Click += new System.EventHandler(this.RoomDeleteBtn_Click);
-            // 
-            // RoomSectionTextBox
-            // 
-            this.RoomSectionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RoomSectionTextBox.Location = new System.Drawing.Point(155, 121);
-            this.RoomSectionTextBox.MaxLength = 10;
-            this.RoomSectionTextBox.Name = "RoomSectionTextBox";
-            this.RoomSectionTextBox.Size = new System.Drawing.Size(212, 22);
-            this.RoomSectionTextBox.TabIndex = 17;
-            this.RoomSectionTextBox.Tag = "";
             // 
             // label21
             // 
@@ -558,17 +583,6 @@
             this.RoomMeetingTimeTextBox.TabIndex = 15;
             this.RoomMeetingTimeTextBox.Tag = "";
             // 
-            // RoomLeaderSSNTextBox
-            // 
-            this.RoomLeaderSSNTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RoomLeaderSSNTextBox.Location = new System.Drawing.Point(155, 93);
-            this.RoomLeaderSSNTextBox.MaxLength = 10;
-            this.RoomLeaderSSNTextBox.Name = "RoomLeaderSSNTextBox";
-            this.RoomLeaderSSNTextBox.Size = new System.Drawing.Size(212, 22);
-            this.RoomLeaderSSNTextBox.TabIndex = 14;
-            this.RoomLeaderSSNTextBox.Tag = "";
-            this.RoomLeaderSSNTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericTextboxKeypress);
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -578,18 +592,6 @@
             this.label18.Size = new System.Drawing.Size(125, 16);
             this.label18.TabIndex = 11;
             this.label18.Text = "Room Leader SSN:";
-            // 
-            // RoomNumberNUD
-            // 
-            this.RoomNumberNUD.Location = new System.Drawing.Point(121, 32);
-            this.RoomNumberNUD.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.RoomNumberNUD.Name = "RoomNumberNUD";
-            this.RoomNumberNUD.Size = new System.Drawing.Size(120, 21);
-            this.RoomNumberNUD.TabIndex = 10;
             // 
             // label17
             // 
@@ -672,7 +674,7 @@
             this.tabSection.Controls.Add(this.SectionListBox);
             this.tabSection.Location = new System.Drawing.Point(4, 25);
             this.tabSection.Name = "tabSection";
-            this.tabSection.Size = new System.Drawing.Size(882, 572);
+            this.tabSection.Size = new System.Drawing.Size(882, 573);
             this.tabSection.TabIndex = 2;
             this.tabSection.Text = "Section";
             // 
@@ -684,12 +686,13 @@
             this.AddSectionBtn.TabIndex = 5;
             this.AddSectionBtn.Text = "Add New";
             this.AddSectionBtn.UseVisualStyleBackColor = true;
+            this.AddSectionBtn.Click += new System.EventHandler(this.AddSectionBtn_Click);
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button5);
+            this.groupBox3.Controls.Add(this.RASSNComboBox);
+            this.groupBox3.Controls.Add(this.SectionSaveBtn);
             this.groupBox3.Controls.Add(this.SectionDeleteBtn);
-            this.groupBox3.Controls.Add(this.SectionRASSNNUD);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.SectionNameTextBox);
@@ -703,14 +706,23 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Section Attributes";
             // 
-            // button5
+            // RASSNComboBox
             // 
-            this.button5.Location = new System.Drawing.Point(424, 97);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(109, 23);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "Save";
-            this.button5.UseVisualStyleBackColor = true;
+            this.RASSNComboBox.FormattingEnabled = true;
+            this.RASSNComboBox.Location = new System.Drawing.Point(208, 74);
+            this.RASSNComboBox.Name = "RASSNComboBox";
+            this.RASSNComboBox.Size = new System.Drawing.Size(121, 23);
+            this.RASSNComboBox.TabIndex = 21;
+            // 
+            // SectionSaveBtn
+            // 
+            this.SectionSaveBtn.Location = new System.Drawing.Point(424, 97);
+            this.SectionSaveBtn.Name = "SectionSaveBtn";
+            this.SectionSaveBtn.Size = new System.Drawing.Size(109, 23);
+            this.SectionSaveBtn.TabIndex = 20;
+            this.SectionSaveBtn.Text = "Save";
+            this.SectionSaveBtn.UseVisualStyleBackColor = true;
+            this.SectionSaveBtn.Click += new System.EventHandler(this.SectionSaveBtn_Click);
             // 
             // SectionDeleteBtn
             // 
@@ -721,13 +733,6 @@
             this.SectionDeleteBtn.Text = "Delete";
             this.SectionDeleteBtn.UseVisualStyleBackColor = true;
             this.SectionDeleteBtn.Click += new System.EventHandler(this.SectionDeleteBtn_Click);
-            // 
-            // SectionRASSNNUD
-            // 
-            this.SectionRASSNNUD.Location = new System.Drawing.Point(208, 75);
-            this.SectionRASSNNUD.Name = "SectionRASSNNUD";
-            this.SectionRASSNNUD.Size = new System.Drawing.Size(120, 21);
-            this.SectionRASSNNUD.TabIndex = 18;
             // 
             // label20
             // 
@@ -754,6 +759,7 @@
             this.SectionNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SectionNameTextBox.Location = new System.Drawing.Point(64, 20);
             this.SectionNameTextBox.Name = "SectionNameTextBox";
+            this.SectionNameTextBox.ReadOnly = true;
             this.SectionNameTextBox.Size = new System.Drawing.Size(192, 22);
             this.SectionNameTextBox.TabIndex = 15;
             // 
@@ -789,7 +795,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 657);
+            this.ClientSize = new System.Drawing.Size(915, 623);
             this.Controls.Add(this.ClassSelectorTabCtrl);
             this.Name = "MainMenuForm";
             this.Text = "Main Menu";
@@ -804,11 +810,9 @@
             this.tabRoom.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.RoomNumberNUD)).EndInit();
             this.tabSection.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SectionRASSNNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SectionPointsNUD)).EndInit();
             this.ResumeLayout(false);
 
@@ -849,9 +853,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker ResidentGraduationDatetimePicker;
-        private System.Windows.Forms.TextBox RoomLeaderSSNTextBox;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.NumericUpDown RoomNumberNUD;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox RoomWorkOrdersTextBox;
@@ -861,24 +863,26 @@
         private System.Windows.Forms.NumericUpDown SectionPointsNUD;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.CheckBox ResidentIsFMCheckbox;
-        private System.Windows.Forms.NumericUpDown SectionRASSNNUD;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox SectionNameTextBox;
-        private System.Windows.Forms.TextBox ResidentAssignedRoomNumTextBox;
         private System.Windows.Forms.TextBox ResidentMealPlanTextBox;
         private System.Windows.Forms.TextBox ResidentNextSemesterTextBox;
         private System.Windows.Forms.TextBox RoomMeetingTimeTextBox;
-        private System.Windows.Forms.TextBox RoomSectionTextBox;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button AddRoomBtn;
         private System.Windows.Forms.Button AddSectionBtn;
         private System.Windows.Forms.Button RoomDeleteBtn;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ResidentSaveBtn;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button RoomSaveBtn;
+        private System.Windows.Forms.Button SectionSaveBtn;
         private System.Windows.Forms.Button SectionDeleteBtn;
+        private System.Windows.Forms.TextBox RoomNumberTextBox;
+        private System.Windows.Forms.ComboBox RoomSectionComboBox;
+        private System.Windows.Forms.ComboBox RoomLeaderSSNComboBox;
+        private System.Windows.Forms.ComboBox RASSNComboBox;
+        private System.Windows.Forms.ComboBox ResidentAssignedRoomComboBox;
     }
 }
 
