@@ -1,13 +1,13 @@
 INSERT INTO resident
 VALUES 
-(111222333, "670-223-7890", "David Palmeri", 0, 0, "Ripped Guys Group", "Live in CCH", 20191222, 20190117,20220517,"Meal Plan 1",1, 0),
-(111222444, "666-654-7890", "Colin Webb", 0, 2, "Ripped Guys Group", "Live in CCH", 20191222, 20190117,20220517,"Meal Plan 3",0, 1),
-(111222555, "666-654-7891", "Adam Brooks", 1200, 1, "Crazy Guys Group", "Graduating", 20190522, 20170818,20220517,"Dinner Only",0, 0),
-(111222666, "666-654-2222", "Cameron Knapp", 0, 0, "Quiet Guys Club", "Gone on Co-op", 20220522, 20170818,20220517,"Meal Plan 3", 0, 0),
-(111222777, "666-718-3424", "J.D. Crawford", 3600, 2, "A.D.D. Guys Group", "Live in CCH", 20210522, 20170818,20220517,"Meal Plan 2",0, 0),
-(111222888, "677-644-9090", "Zach Bax", 3000, 17, "RAs Only Club", "Graduating", 20190522, 20170818,20220517,"Dinner Only",0, 0),
-(111222999, "688-655-9191", "J. Calvin Nagle", 2000, 2, "RAs Only Club", "Live in CCH", 20220522, 20180817, 20190522, "Meal Plan 3",1,0),
-(111333000, "699-666-9191", "Danny Boutorff", 0, 0, "Smart Guys Group", "Live in CCH", 20210522, 20180817, 20190522, "Meal Plan 2",1,0);
+(111222333, "6702237890", "David Palmeri", 0, 0, "Ripped Guys Group", "Live in CCH", 20191222, 20190117,20220517,"Meal Plan 1",1, 0),
+(111222444, "6666547890", "Colin Webb", 0, 2, "Ripped Guys Group", "Live in CCH", 20191222, 20190117,20220517,"Meal Plan 3",0, 1),
+(111222555, "6666547891", "Adam Brooks", 1200, 1, "Crazy Guys Group", "Graduating", 20190522, 20170818,20220517,"Dinner Only",0, 0),
+(111222666, "6666542222", "Cameron Knapp", 0, 0, "Quiet Guys Club", "Gone on Co-op", 20220522, 20170818,20220517,"Meal Plan 3", 0, 0),
+(111222777, "6667183424", "J.D. Crawford", 3600, 2, "A.D.D. Guys Group", "Live in CCH", 20210522, 20170818,20220517,"Meal Plan 2",0, 0),
+(111222888, "6776449090", "Zach Bax", 3000, 17, "RAs Only Club", "Graduating", 20190522, 20170818,20220517,"Dinner Only",0, 0),
+(111222999, "6886559191", "J. Calvin Nagle", 2000, 2, "RAs Only Club", "Live in CCH", 20220522, 20180817, 20190522, "Meal Plan 3",1,0),
+(111333000, "6996669191", "Danny Boutorff", 0, 0, "Smart Guys Group", "Live in CCH", 20210522, 20180817, 20190522, "Meal Plan 2",1,0);
 
 INSERT INTO room
 VALUES
