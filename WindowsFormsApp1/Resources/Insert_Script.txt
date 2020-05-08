@@ -1,7 +1,7 @@
 INSERT INTO resident
 VALUES 
-(111222333, "670-223-7890", "David Palmeri", 0, 0, "Ripped Guys Group", "Live in CCH", 20191222, 201901117,20220517,"Meal Plan 1",1, 0),
-(111222444, "666-654-7890", "Colin Webb", 0, 2, "Ripped Guys Group", "Live in CCH", 20191222, 201901117,20220517,"Meal Plan 3",0, 1),
+(111222333, "670-223-7890", "David Palmeri", 0, 0, "Ripped Guys Group", "Live in CCH", 20191222, 20190117,20220517,"Meal Plan 1",1, 0),
+(111222444, "666-654-7890", "Colin Webb", 0, 2, "Ripped Guys Group", "Live in CCH", 20191222, 20190117,20220517,"Meal Plan 3",0, 1),
 (111222555, "666-654-7891", "Adam Brooks", 1200, 1, "Crazy Guys Group", "Graduating", 20190522, 20170818,20220517,"Dinner Only",0, 0),
 (111222666, "666-654-2222", "Cameron Knapp", 0, 0, "Quiet Guys Club", "Gone on Co-op", 20220522, 20170818,20220517,"Meal Plan 3", 0, 0),
 (111222777, "666-718-3424", "J.D. Crawford", 3600, 2, "A.D.D. Guys Group", "Live in CCH", 20210522, 20170818,20220517,"Meal Plan 2",0, 0),
